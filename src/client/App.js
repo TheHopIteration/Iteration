@@ -4,6 +4,7 @@ import { HomePage } from "./components/HomePage";
 import { LoginPage } from "./components/LoginPage";
 import { SignupPage } from "./components/SignupPage";
 import { ProfilePage } from "./components/ProfilePage";
+import { Header } from "./components/Header";
 
 function App() {
   const [user, setUser] = useState({});
@@ -60,6 +61,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <Header user={user} setUser={setUser} setLoggingOut={setLoggingOut}/>
       <Routes>
         <Route
           path="/"
