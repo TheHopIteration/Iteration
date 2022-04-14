@@ -44,7 +44,7 @@ export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents,
                 <p>{event.address}</p>
                 <p className="text-gray-500">category: {event.category}</p>
                 <p className="text-gray-500">tags: {event.labels}</p>
-                <div class="flex space-x-2 justify-center">
+                <div className="flex space-x-2 justify-center">
                     <a href={link} target="new">
                         <SearchIcon className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-green-400 hover:bg-green-300" style={{ color: "blue", fontSize: 40 }} /></a>
                     <DeleteRoundedIcon className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-red-500 hover:bg-red-400" onClick={() => deleteEvent()} style={{ color: "blue", fontSize: 40 }} />
