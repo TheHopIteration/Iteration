@@ -12,3 +12,7 @@ If you desire the ability to find events happening NOW, get TheHop.
 
 ## Community concerts, performing arts festivals, religious observances, sports, & more…right near you…
 # TheHop!
+
+
+**COMMITTING TO POSTGRESQL**
+psql -d 'postgres://cnsoyjew:gT-IABEJlCN9C44A-WF5TEti-9zS9k71@heffalump.db.elephantsql.com/cnsoyjew' -f postgres-creat.sql
