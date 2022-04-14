@@ -7,6 +7,8 @@ import { useState, useEffect, useRef } from "react";
 import { useJsApiLoader } from '@react-google-maps/api';
 import { useLocation } from "react-router-dom";
 
+
+
 const placeLib = ['places'];
 export const HomePage = ({ user, setUser, setLoggingOut }) => {
   const [apiEvents, setApiEvents] = useState([]);

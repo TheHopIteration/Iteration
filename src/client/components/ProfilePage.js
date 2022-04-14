@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Header } from './Header'
 import { SavedEventsContainer } from './profilepage/SavedEventsContainer'
-import { ScheduleCard } from './profilepage/ScheduleCard'
+import { ScheduleCard } from './profilepage/ScheduleCard/ScheduleCard'
 import { Footer } from './Footer'
 
 
@@ -40,10 +40,10 @@ export const ProfilePage = ({ user, setUser, setLoggingOut }) => {
     <div className='flex-col'>
       <Header user={user} setUser={setUser} setLoggingOut={setLoggingOut} />
       <div className="flex font-serif bg-gray-100 shadow-lg">
-        <div className="h-[86vh] w-1/2 overflow-y-auto">
+        <div className="h-[86vh] w-1/3 overflow-y-auto">
           <SavedEventsContainer user={user} userEvents={userEvents} setUserEvents={setUserEvents} />
         </div>
-        <div className="h-[86vh] w-1/2 overflow-y-auto">
+        <div className="h-[86vh] w-2/3 overflow-y-auto">
           <ScheduleCard user={user} userEvents={userEvents} />
         </div>
       </div>

@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css'
+import './schedulecard.css'
 
 export const ScheduleCard = ({ user, userEvents }) => {
     const today = new Date();
@@ -18,23 +21,18 @@ export const ScheduleCard = ({ user, userEvents }) => {
     })
     // console.log('userEvents this month is: ', eventsThisMonth);
 
+    // handle date click on calendar
+    // will filter out a list of pulled dates 
+    const pickDate = (val) => {
+        console.log('DATE: ', val)
+    }
+    
     return (
-        //         <div className="inline-flex h-screen border-2 border-red-300 justify-center">
-        //             <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm text-center">
-        //                 <h5 className="text-gray-900 text-xl leading-tight font-medium mb-4 flex">Scheduled Events</h5>
-        //                 <p className="list-item text-gray-700 text-base mb-4">
-        //                     placeholder:
-        //                 </p>
-        //                 <p className="list-item text-gray-700 text-base mb-4">
-        //                     placeholder:
-        //                 </p>
-        //             </div>
-        //         </div>
-        //     )
-        // }
+
 
         <div className="flex items-center bg-gray-100 justify-center h-full">
-            <div className="max-w-sm w-full shadow-lg">
+            <Calendar onChange={pickDate}/>
+            {/* <div className="max-w-sm w-full shadow-lg">
                 <div className="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
                     <div className="px-4 flex items-center justify-between">
                         <span tabIndex="0" className="focus:outline-none text-base font-bold dark:text-gray-100 text-gray-800">{months[month]} {year}</span>
@@ -393,25 +391,7 @@ export const ScheduleCard = ({ user, userEvents }) => {
                         </table>
                     </div>
                 </div>
-                {/* <div className="md:py-8 py-5 md:px-16 px-5 dark:bg-gray-700 bg-gray-50 rounded-b">
-                    <div className="px-4">
-                        <div clasName="border-b pb-4 border-gray-400 border-dashed">
-                            <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">9:00 AM</p>
-                            <a tabIndex="0" className="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">Zoom call with design team</a>
-                            <p className="text-sm pt-2 leading-4 text-gray-600 dark:text-gray-300">Discussion on UX sprint and Wireframe review</p>
-                        </div>
-                        <div className="border-b pb-4 border-gray-400 border-dashed pt-5">
-                            <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">10:00 AM</p>
-                            <a tabIndex="0" className="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">Orientation session with new hires</a>
-                        </div>
-                        <div className="border-b pb-4 border-gray-400 border-dashed pt-5">
-                            <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">9:00 AM</p>
-                            <a tabIndex="0" className="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">Zoom call with design team</a>
-                            <p className="text-sm pt-2 leading-4 text-gray-600 dark:text-gray-300">Discussion on UX sprint and Wireframe review</p>
-                        </div>
-                    </div>
-                </div> */}
-            </div>
+            </div> */}
         </div>
     )
 }
