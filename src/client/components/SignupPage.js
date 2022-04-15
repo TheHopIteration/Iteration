@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export const SignupPage = () => {
 
     let navigate = useNavigate();
+    
     const createUser = () => {
         let username = document.getElementById("usernameCreateUserForm").value;
         let password = document.getElementById("passwordCreateUserForm").value;
