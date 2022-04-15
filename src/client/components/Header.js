@@ -20,7 +20,6 @@ export const Header = ({ user, setUser, setLoggingOut }) => {
 
   const logout = () => {
     setLoggingOut(true);
-    setUser({});
     navHome();
   };
 
