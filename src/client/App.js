@@ -33,12 +33,8 @@ function App() {
         credentials: "include",
         body: JSON.stringify({ username: user.username, userid: user.userid }),
       })
-        .then((res) => {
-          setUser({});
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        .then((res) => {setUser({})})
+        .catch((err) => {console.log(err)});
     };
 
     if (!loggingOut) {
