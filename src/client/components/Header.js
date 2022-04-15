@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-export const Header = ({ user, setUser, setLoggingOut }) => {
+export const Header = ({ user, setLoggingOut }) => {
   const location = useLocation();
   let navigate = useNavigate();
 
@@ -19,8 +19,9 @@ export const Header = ({ user, setUser, setLoggingOut }) => {
   };
 
   const logout = () => {
+    // navHome();
     setLoggingOut(true);
-    navHome();
+    setTimeout(() => navHome(), 50);
   };
 
   // console.log("user is", user);

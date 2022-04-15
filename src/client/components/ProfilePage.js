@@ -5,7 +5,7 @@ import { ScheduleCard } from './profilepage/ScheduleCard'
 import { Footer } from './Footer'
 
 
-export const ProfilePage = ({ user, setUser, setLoggingOut }) => {
+export const ProfilePage = ({ user }) => {
   const [userEvents, setUserEvents] = useState([]);
 
   let backendUrl = new URL("http://localhost:3000/api/events");

@@ -34,7 +34,10 @@ function App() {
         credentials: "include",
         body: JSON.stringify({ username: user.username, userid: user.userid }),
       })
-        .then((res) => {setUser({})})
+        .then((res) => {
+          setUser({})
+          console.log('**HERE**');
+        })
         .catch((err) => {console.log(err)});
     };
 
@@ -50,15 +53,13 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Header user={user} setUser={setUser} setLoggingOut={setLoggingOut}/>
+    <Header user={user} setLoggingOut={setLoggingOut}/>
       <Routes>
         <Route
           path="/"
           element={
             <HomePage
               user={user}
-              setUser={setUser}
-              setLoggingOut={setLoggingOut}
             />
           }
         ></Route>
@@ -69,8 +70,6 @@ function App() {
           element={
             <ProfilePage
               user={user}
-              setUser={setUser}
-              setLoggingOut={setLoggingOut}
             />
           }
         ></Route>

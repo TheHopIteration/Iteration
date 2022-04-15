@@ -8,7 +8,7 @@ import { useJsApiLoader } from '@react-google-maps/api';
 import { useLocation } from "react-router-dom";
 
 const placeLib = ['places'];
-export const HomePage = ({ user, setUser, setLoggingOut }) => {
+export const HomePage = ({ user }) => {
   const [apiEvents, setApiEvents] = useState([]);
   const [mapBase, setMapBase] = useState({});
   const [circleRadius, setCircleRadius] = useState(0);
