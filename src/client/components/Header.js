@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-export const Header = ({ user, setLoggingOut }) => {
+export const Header = ({ user, setUser }) => {
   const location = useLocation();
   let navigate = useNavigate();
 
@@ -18,10 +18,39 @@ export const Header = ({ user, setLoggingOut }) => {
     navigate("/");
   };
 
+
   const logout = () => {
+    console.log('HERE')
+    fetch("http://localhost:3000/auth/logout", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ username: user.username, userid: user.userid }),
+    })
+      .then((res) => {
+        setUser({})
+        console.log('**HERE**');
+      })
+      .catch((err) => {console.log(err)});
+  };
+
+
+  useEffect(() => {
+    if (JSON.stringify(user) === JSON.stringify({})) {
+      navHome();
+    }
+  }, [user]);
+
+
+
+
+  const initLogout = () => {
+    logout();
     // navHome();
-    setLoggingOut(true);
-    setTimeout(() => navHome(), 50);
+    // setLoggingOut(true);
+    // setTimeout(() => navHome(), 50);
   };
 
   // console.log("user is", user);
@@ -215,7 +244,7 @@ export const Header = ({ user, setLoggingOut }) => {
               hover:bg-gray-100
             "
                       href="#"
-                      onClick={() => logout()}
+                      onClick={() => initLogout()}
                     >
                       Logout
                     </a>

@@ -25,9 +25,9 @@ export const HomePage = ({ user }) => {
   })
 
 
+  // re-render page when the apiEvents object
   useEffect(() => {
-    // re-render page when the apiEvents object or when user logs in or out changes.
-  }, [apiEvents.length, JSON.stringify(user), location])
+  }, [apiEvents.length, location])
 
   if (!isLoaded) return <div>Waiting for Google API to load ...</div>;
   return (
