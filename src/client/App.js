@@ -24,8 +24,9 @@ function App() {
         });
     };
 
-    const logout = async () => {
-      await fetch("http://localhost:3000/auth/logout", {
+    const logout = () => {
+      console.log('HERE')
+      fetch("http://localhost:3000/auth/logout", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -33,19 +34,8 @@ function App() {
         credentials: "include",
         body: JSON.stringify({ username: user.username, userid: user.userid }),
       })
-        .then((response) => response.json())
-        .then((res) => {
-          console.log(
-            "user has been successfully logged out and session destroyed"
-          );
-          // reset user state to empty object
-          setLoggingOut(true);
-          setUser({});
-          window.location.reload(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        .then((res) => {setUser({})})
+        .catch((err) => {console.log(err)});
     };
 
     if (!loggingOut) {
@@ -53,11 +43,10 @@ function App() {
       console.log('logging in')
     } else {
       logout();
-      setUser({});
       setLoggingOut(false);
       console.log('logging out')
     }
-  }, [document.location.href]);
+  }, [document.location.href, loggingOut]);
 
   return (
     <BrowserRouter>

@@ -32,7 +32,7 @@ export const HomePage = ({ user, setUser, setLoggingOut }) => {
   if (!isLoaded) return <div>Waiting for Google API to load ...</div>;
   return (
     <div className="flex-col">
-      
+      <Header user={user} setLoggingOut={setLoggingOut}/>
       <div className="flex relative">
         <Sidebar apiEvents={apiEvents} setApiEvents={setApiEvents} user={user} setMapBase={setMapBase} mapRef={mapRef} setCircleRadius={setCircleRadius} />
         <Map apiEvents={apiEvents} mapBase={mapBase} mapRef={mapRef} circleRadius={circleRadius} />

@@ -55,7 +55,6 @@ sessionController.logout = async (req, res, next) => {
     return next({ log: "Not logged in", message: "Not logged in" });
 
   const logoutHelper = () => {
-    console.log("user session is :", req.session.user.username);
     const username = req.session.user.username;
     
     res.clearCookie("userID", { path: "/" });
@@ -71,7 +70,6 @@ sessionController.logout = async (req, res, next) => {
       }
       res.clearCookie("userID", { path: "/" });
       res.clearCookie("connect.sid", { path: "/" });
-      console.log(username + " logged out.");
       return next();
     });
   };
