@@ -7,6 +7,7 @@ const router = express.Router();
 
 // responds with whether or not a user is logged in
 router.get("/", (req, res) => {
+  console.log(`REQ-SESSION: ${JSON.stringify(req.session)}`)
   if (req.session.user && req.session.authenticated) {
     return res.send({ isLoggedIn: true, user: req.session.user });
   } else if (req.session.user) {
