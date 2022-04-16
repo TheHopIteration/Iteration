@@ -101,10 +101,10 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
   return (
     <div id="SearchBox" className="flex w-full m-4 items-center justify-center">
 
-        <div className="text-md font-semibold text-gray-500 mt-2 mr-1">Location:  </div>
+        <div className="text-md font-semibold text-gray-500 mr-1">Location:  </div>
 
         <AutoComplete id="locationForm"
-          className= "w-72 px-3 py-1.5 font-normal text-gray-600 placeholder-gray-400 bg-white bg-clip-padding border-2 border-solid border-gray-400 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-500 focus:outline-none"
+          className= "w-72 px-3 py-2 font-normal text-gray-600 placeholder-gray-400 bg-white bg-clip-padding border-2 border-solid border-gray-400 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-500 focus:outline-none"
 
           // apiKey={process.env.GOOGLE_MAPS}
 
@@ -116,8 +116,11 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
           onPlaceSelected={(place) => {
             console.log('returned autocompleted place is: ', place);
           }}/>
+<div class="visible md:hidden"> 
+        Graphic Buttons
+</div>
 
-          
+<div class="invisible md:visible" > 
           <button 
             className="px-4 py-2 border-2 border-blue-400 text-blue-400 ml-4 font-semibold text-sm leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
             type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
@@ -129,11 +132,15 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
             onClick={() => {
               onFind();
             }}
-            className="px-4 py-2 border-2 border-blue-400 text-white bg-blue-500 ml-4 text-sm font-semibold leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            className="px-4 py-2 border-2 border-blue-400 text-white bg-blue-500 ml-4 mr-4 text-sm font-semibold leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
             type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
           >
             Search Events
           </button>
+</div>
+
+
+
 
       <div 
         className="offcanvas offcanvas-start fixed bottom-0 flex flex-col max-w-full bg-gradient-to-r from-gray-50 to-green-50 invisible bg-clip-padding shadow-sm outline-none transition duration-300 ease-in-out text-gray-700 top-0 left-0 border-none w-96" 
