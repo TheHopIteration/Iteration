@@ -25,7 +25,6 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs);
     fetch(`http://localhost:3000/api/users/${user.userid}`, {
       method: 'PUT',
       headers: {
