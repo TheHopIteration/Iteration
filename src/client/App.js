@@ -4,6 +4,7 @@ import { HomePage } from "./components/HomePage";
 import { LoginPage } from "./components/LoginPage";
 import { SignupPage } from "./components/SignupPage";
 import { ProfilePage } from "./components/ProfilePage";
+import { EditProfilePage } from "./components/EditProfilePage"
 import { Header } from "./components/Header";
 
 function App() {
@@ -79,6 +80,16 @@ function App() {
           path="/profile"
           element={
             <ProfilePage
+              user={user}
+              setUser={setUser}
+              setLoggingOut={setLoggingOut}
+            />
+          }
+        ></Route>
+        <Route
+          path="/editProfile"
+          element={
+            <EditProfilePage
               user={user}
               setUser={setUser}
               setLoggingOut={setLoggingOut}
