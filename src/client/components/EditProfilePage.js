@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react'
 
 
 export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
-  const [userEvents, setUserEvents] = useState([]);
-  console.log("user", user);
+  const [inputs, setInputs] = useState({});
   
   useEffect(() => {
     //need to get user data from user.userid
@@ -18,14 +17,31 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
     // console.log(data);
   })
 
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputs(values => ({...values, [name]: value}))
+  }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputs);
+    fetch(`http://localhost:3000/api/users/${user.userid}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: "include",
+      body: JSON.stringify({ "firstName": inputs.firstName, "lastName": inputs.lastName, "email": inputs.email, "homeLocation": inputs.homeLocation}),
+    })
+  }
 
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
-  <form>
+  <form onSubmit={handleSubmit}>
   <div className="form-group mb-6">
       <label htmlFor="firstName" className="form-label inline-block mb-2 text-gray-700">First name</label>
-      <input type="text" className="form-control
+      <input type="text" name="firstName" value={inputs.firstName || ""} onChange={handleChange} className="form-control
         block
         w-full
         px-3
@@ -44,7 +60,7 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
     </div>
     <div className="form-group mb-6">
       <label htmlFor="lastName" className="form-label inline-block mb-2 text-gray-700">Last name</label>
-      <input type="text" className="form-control
+      <input type="text" name="lastName" value={inputs.lastName || ""} onChange={handleChange} className="form-control
         block
         w-full
         px-3
@@ -63,7 +79,7 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
     </div>
     <div className="form-group mb-6">
       <label htmlFor="inputEmail" className="form-label inline-block mb-2 text-gray-700">Email address</label>
-      <input type="email" className="form-control
+      <input type="email" name="email" value={inputs.email || ""} onChange={handleChange} className="form-control
         block
         w-full
         px-3
@@ -82,7 +98,7 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
     </div>
     <div className="form-group mb-6">
       <label htmlFor="inputAddress" className="form-label inline-block mb-2 text-gray-700">Home address</label>
-      <input type="text" className="form-control
+      <input type="text" name="homeLocation" value={inputs.homeLocation || ""} onChange={handleChange} className="form-control
         block
         w-full
         px-3
@@ -97,9 +113,9 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputEmail1"
-        placeholder="Enter email..."/>
+        placeholder="Enter address..."/>
     </div>
-    <button type="submit" className="
+    <button type="submit" onClick={handleSubmit} className="
       px-6
       py-2.5
       bg-blue-600
