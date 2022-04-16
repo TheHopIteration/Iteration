@@ -5,8 +5,8 @@ import {Box, Container} from '@mui/material'
 import { SavedEventCard } from '../SavedEventCard';
 import { Fullscreen } from '@mui/icons-material';
 
-export const EventsDisplay = ({user, eventsToday, setUserEvents}) => {
-    if(!eventsToday){
+export const EventsDisplay = ({user, eventsToday, setUserEvents, chosenDate}) => {
+    if(eventsToday.length === 0){
         return(
             <Container
             sx={{
@@ -16,7 +16,7 @@ export const EventsDisplay = ({user, eventsToday, setUserEvents}) => {
                 borderRadius: 1,
             }}
         >
-            <h3>No events found</h3>
+            <h3>No events found for {chosenDate}</h3>
         </Container>
         )
     }
@@ -36,7 +36,7 @@ export const EventsDisplay = ({user, eventsToday, setUserEvents}) => {
                 bgcolor: 'background.paper',
                 borderRadius: 1
             }}
-            ><h3>Events Happening Today</h3>
+            ><h3>Events Happening {chosenDate}</h3>
             </Box>
             {eventsToday.map((event, index) => 
             <SavedEventCard index={index} event={event} cardId={index} key={index} user={user} userEvents={eventsToday} setUserEvents={setUserEvents} ></SavedEventCard>

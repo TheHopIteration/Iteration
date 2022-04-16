@@ -11,7 +11,7 @@ export const ScheduleCard = ({ user, userEvents, setUserEvents }) => {
 
 
     const [eventsToday, setEvents] = React.useState([])
-
+    const [chosenDate, setDate] = React.useState('')
     // function to convert timezones
     const timeConverterCalendar = (datetime) => {
         const date = new Date(datetime);
@@ -35,6 +35,7 @@ export const ScheduleCard = ({ user, userEvents, setUserEvents }) => {
             }
         }
         setEvents([...eveArr])
+        setDate(timeConverterCalendar(val.toISOString()).slice(0,8))
     }
 
     // render the EventsDisplay on load
@@ -50,7 +51,7 @@ export const ScheduleCard = ({ user, userEvents, setUserEvents }) => {
                 }
                 >
                 <Calendar onChange={pickDate}/>
-                <EventsDisplay user={user} eventsToday={eventsToday} setUserEvents={setUserEvents} />
+                <EventsDisplay user={user} eventsToday={eventsToday} setUserEvents={setUserEvents} chosenDate={chosenDate} />
             </Container>
 
     )
