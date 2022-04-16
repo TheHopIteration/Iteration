@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react'
 // const db = require("../models/dataModels");
-import { Header } from './Header'
-import { SavedEventsContainer } from './profilepage/SavedEventsContainer'
-import { ScheduleCard } from './profilepage/ScheduleCard'
-import { Footer } from './Footer'
 
 
 export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
