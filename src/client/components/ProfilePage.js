@@ -5,7 +5,7 @@ import { ScheduleCard } from './profilepage/ScheduleCard'
 import { Footer } from './Footer'
 
 
-export const ProfilePage = ({ user, setUser, setLoggingOut }) => {
+export const ProfilePage = ({ user }) => {
   const [userEvents, setUserEvents] = useState([]);
 
   let backendUrl = new URL("http://localhost:3000/api/events");
@@ -14,6 +14,7 @@ export const ProfilePage = ({ user, setUser, setLoggingOut }) => {
   }
 
   console.log('user object is, ', user);
+
   useEffect(() => {
     fetch(backendUrl, {
       headers: {
@@ -28,11 +29,10 @@ export const ProfilePage = ({ user, setUser, setLoggingOut }) => {
         console.log(err);
       })
 
-    // re-render page when the apiEvents object or when user logs in or out changes.
+    // re-render page when the apiEvents object.
     console.log("useEffect in savedEventsContainer is fired, reloaded page due to change in apiEvents")
-  }, [JSON.stringify(userEvents), JSON.stringify(user)])
+  }, [JSON.stringify(userEvents)])
 
-  //if we are logged in then we fetch from DB
 
 
 

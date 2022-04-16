@@ -8,7 +8,7 @@ import { useJsApiLoader } from '@react-google-maps/api';
 import { useLocation } from "react-router-dom";
 
 const placeLib = ['places'];
-export const HomePage = ({ user, setUser, setLoggingOut }) => {
+export const HomePage = ({ user }) => {
   const [apiEvents, setApiEvents] = useState([]);
   const [mapBase, setMapBase] = useState({});
   const [circleRadius, setCircleRadius] = useState(0);
@@ -25,14 +25,13 @@ export const HomePage = ({ user, setUser, setLoggingOut }) => {
   })
 
 
+  // re-render page when the apiEvents object
   useEffect(() => {
-    // re-render page when the apiEvents object or when user logs in or out changes.
-  }, [apiEvents.length, JSON.stringify(user), location])
+  }, [apiEvents.length, location])
 
   if (!isLoaded) return <div>Waiting for Google API to load ...</div>;
   return (
     <div className="flex-col">
-      
       <div className="flex relative">
         <Sidebar apiEvents={apiEvents} setApiEvents={setApiEvents} user={user} setMapBase={setMapBase} mapRef={mapRef} setCircleRadius={setCircleRadius} />
         <Map apiEvents={apiEvents} mapBase={mapBase} mapRef={mapRef} circleRadius={circleRadius} />
