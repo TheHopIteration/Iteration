@@ -37,13 +37,6 @@ export const LoginPage = ({ user, sessionCheck }) => {
                     alert('Wrong password!');
                 }
             })
-            //this commented out code never works because there's no response from the previous .then. It just causes errors? I am unsure what the purpose of this is because setUser isn't even defined.
-            // .then(res => res.JSON())
-            // .then(res => {
-            //     if (res.isLoggedIn) {
-            //         setUser(response.user)
-            //     }
-            // })
             .catch(err => {
                 console.log(err);
             })

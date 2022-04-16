@@ -254,9 +254,6 @@ userController.deleteUser = async (req, res, next) => {
       });
     }
 
-    console.log(deletedUser);
-
-    console.log("deleted user:  ", username);
     return next();
   } catch (err) {
     return next({

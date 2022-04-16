@@ -23,7 +23,6 @@ export const Header = ({ user, setUser }) => {
   }
 
   const logout = () => {
-    console.log('HERE')
     fetch("http://localhost:3000/auth/logout", {
       method: "DELETE",
       headers: {
@@ -34,7 +33,6 @@ export const Header = ({ user, setUser }) => {
     })
       .then((res) => {
         setUser({})
-        console.log('**HERE**');
       })
       .catch((err) => {console.log(err)});
   };
@@ -51,12 +49,7 @@ export const Header = ({ user, setUser }) => {
 
   const initLogout = () => {
     logout();
-    // navHome();
-    // setLoggingOut(true);
-    // setTimeout(() => navHome(), 50);
   };
-
-  // console.log("user is", user);
 
   return (
     <nav className="bg-gradient-to-r from-green-600 to-green-500 h-20 drop-shadow-xl relative z-50">

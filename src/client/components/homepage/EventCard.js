@@ -13,19 +13,19 @@ export const EventCard = ({ event, cardId, user, num }) => {
     const endTime = timeConverter(event.end);
 
     // extracting values from event to save into database
-    const eventid = event.id;
-    const title = event.title;
-    const category = event.category;
-    const labels = event.labels;
-    const description = event.description;
-    const predicted_attendance = event.phq_attendance;
-    const latitude = event.location[1];
-    const longitude = event.location[0];
-    const start_time = event.start;
-    const privateVal = event.private;
-    const local_rank = event.local_rank;
-    const rank = event.rank;
-    const address = event.entities[0] ? event.entities[0].formatted_address.slice(0, -30) : null;
+    const eventid = event.id ? event.id : null;
+    const title = event.title ? event.title : null;
+    const category = event.category ? event.category : null;
+    const labels = event.labels ? event.labels : null;
+    const description = event.description ? event.description : null;
+    const predicted_attendance = event.phq_attendance ? event.phq_attendance : null;
+    const latitude = event.location[1] ? event.location[1] : null;
+    const longitude = event.location[0] ? event.location[0] : null;
+    const start_time = event.start ? event.start : null;
+    const privateVal = event.private ? event.private : null;
+    const local_rank = event.local_rank ? event.local_rank : null;
+    const rank = event.rank ? event.rank : null;
+    const address = event.entities[0].formatted_address ? event.entities[0].formatted_address.slice(0, -30) : null;
 
     const saveEvent = () => {
         fetch('http://localhost:3000/api/events', {
