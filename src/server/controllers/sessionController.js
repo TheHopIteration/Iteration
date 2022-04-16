@@ -33,8 +33,6 @@ sessionController.verifyUser = async (req, res, next) => {
     if (verification) {
       req.session.authenticated = true;
       req.session.user = res.locals.getUser;
-      console.log(username + " logged in");
-      console.log(req.session);
       return next();
     } else
       return next({

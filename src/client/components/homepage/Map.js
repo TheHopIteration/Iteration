@@ -1,16 +1,6 @@
-import React, { Component, useMemo, useCallback, useRef, useState, useEffect } from 'react';
+import React, { useMemo, useCallback, useState, useEffect } from 'react';
 import { Circle, GoogleMap, Marker, MarkerClusterer, InfoWindow, useJsApiLoader } from '@react-google-maps/api';
 
-// todo
-// create state to center map - Done - mapBase
-// pan map to location when user searches -Done - used useEffect in Map and panTo
-// the state has to be accessible to both searchbox and map so homepage is likely a good place - Done
-// learn how to create colored marker - DONE
-// need to add number to apiEvents, - Done
-// render number on eventCard, - Done
-// show number on bubble, -Done
-// learn how to create info window that is toggled on click of marker - done
-// pass info from each event into info window and marker - done
 
 const containerStyle = {
     width: '100%',
@@ -33,12 +23,6 @@ export const Map = ({ apiEvents, mapBase, mapRef, circleRadius }) => {
         clickableIcons: false,
     }), []);
 
-    // const mapRef = useRef();
-
-    // const { isLoaded } = useJsApiLoader({
-    //     id: 'google-map-script',
-    //     googleMapsApiKey: process.env.GOOGLE_MAPS
-    // })
     const timeConverter = (datetime) => {
         const date = new Date(datetime);
         return date.toLocaleString('en-US').slice(0, 21);
@@ -61,7 +45,6 @@ export const Map = ({ apiEvents, mapBase, mapRef, circleRadius }) => {
             options={options}
             onLoad={onLoad}
             className="map"
-        // onUnmount={onUnmount}
         >
             <>
                 {(JSON.stringify(mapBase) !== JSON.stringify({}) &&
@@ -146,5 +129,4 @@ export const Map = ({ apiEvents, mapBase, mapRef, circleRadius }) => {
             </>
         </GoogleMap>
     )
-    // : <div>loading...</div>
 }

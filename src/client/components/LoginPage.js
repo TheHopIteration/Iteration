@@ -37,12 +37,6 @@ export const LoginPage = ({ user, sessionCheck }) => {
                     alert('Wrong password!');
                 }
             })
-            .then(res => res.JSON())
-            .then(res => {
-                if (res.isLoggedIn) {
-                    setUser(response.user)
-                }
-            })
             .catch(err => {
                 console.log(err);
             })

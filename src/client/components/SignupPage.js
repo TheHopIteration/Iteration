@@ -19,8 +19,6 @@ export const SignupPage = () => {
             body: JSON.stringify({ "username": username, "password": password, "email": email }),
         }).then(async (response) => {
             if (response.status === 200) {
-                // const user = await response.json();
-                // setUser(user);
                 navigate("/");
                 window.location.reload(false);
             } else {
