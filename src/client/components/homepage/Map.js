@@ -13,8 +13,8 @@ import { Circle, GoogleMap, Marker, MarkerClusterer, InfoWindow, useJsApiLoader 
 // pass info from each event into info window and marker - done
 
 const containerStyle = {
-    width: '100%',
-    height: 'auto'
+    width: '90%',
+    height: '500px'
 };
 
 export const Map = ({ apiEvents, mapBase, mapRef, circleRadius }) => {
@@ -129,7 +129,8 @@ export const Map = ({ apiEvents, mapBase, mapRef, circleRadius }) => {
                                                     lng: parseFloat(event.location[0])
                                                 }}
                                             >
-                                                <div className="text-center p-2 bg-gray-50 border-2 border-emerald-400 first-letter: shadow-md flex-row font-gray-500">
+                
+                                                <div className="text-center p-2 bg-gray-50 border-2 border-emerald-400 first-letter: shadow-md flex-col font-gray-500">
                                                     <h3 className='font-semibold text-base'>{event.title}</h3>
                                                     <h5 className='text-sm'>Category: {event.category}</h5>
                                                     <h5 className='text-sm'>{timeConverter(event.start)}</h5>

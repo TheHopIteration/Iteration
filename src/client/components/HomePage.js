@@ -1,13 +1,14 @@
 import React from "react";
-
-import { Sidebar } from "./homepage/Sidebar";
 import { Map } from "./homepage/Map";
 import { Footer } from "./Footer";
 import { useState, useEffect, useRef } from "react";
 import { useJsApiLoader } from '@react-google-maps/api';
 import { useLocation } from "react-router-dom";
+import { SearchBox } from './homepage/SearchBox';
+import { EventsContainer } from './homepage/EventsContainer'
 
 const placeLib = ['places'];
+
 export const HomePage = ({ user, setUser, setLoggingOut }) => {
   const [apiEvents, setApiEvents] = useState([]);
   const [mapBase, setMapBase] = useState({});
@@ -30,14 +31,23 @@ export const HomePage = ({ user, setUser, setLoggingOut }) => {
   }, [apiEvents.length, JSON.stringify(user), location])
 
   if (!isLoaded) return <div>Waiting for Google API to load ...</div>;
+
+//when you switch the second classname from flex relative to flex-col the map disappears
+
   return (
     <div className="flex-col">
-      
-      <div className="flex relative">
+      <SearchBox apiEvents={apiEvents} setApiEvents={setApiEvents} setMapBase={setMapBase} mapRef={mapRef} setCircleRadius={setCircleRadius} />
+      {/* <div class = 'flex items-center justify-center'>
         <Sidebar apiEvents={apiEvents} setApiEvents={setApiEvents} user={user} setMapBase={setMapBase} mapRef={mapRef} setCircleRadius={setCircleRadius} />
+      </div> */}
+
+      <div class = 'flex items-center justify-center'>
         <Map apiEvents={apiEvents} mapBase={mapBase} mapRef={mapRef} circleRadius={circleRadius} />
       </div>
+      &nbsp;
+      <EventsContainer apiEvents={apiEvents} user={user} />
       <Footer />
     </div>
   );
+
 };

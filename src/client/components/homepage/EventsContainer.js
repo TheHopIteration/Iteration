@@ -23,7 +23,9 @@ export const EventsContainer = ({ apiEvents, user }) => {
                     }
                 </div>
                 :
-                <div className='flex pl-16 pt-10 h-[70vh] w-85 bg-neutral-50'>
+
+                // pl-16 pt-10 h-[70vh] w-85 bg-neutral-50
+                <div className='flex items-center justify-center'>
                     <a>
                         <img
                             className="h-[30vh]"

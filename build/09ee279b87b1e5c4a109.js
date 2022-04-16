@@ -1,1 +1,0 @@
-import React from"react";import ReactDOM from"react-dom";import App from"./App.js";import"../../public/styles.scss";import"tw-elements";import"flowbite";var appElement=document.getElementById("app");ReactDOM.render(React.createElement(App,null),appElement);
