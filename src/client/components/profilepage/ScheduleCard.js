@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 export const ScheduleCard = ({ user, userEvents }) => {
     const today = new Date();
@@ -16,7 +16,6 @@ export const ScheduleCard = ({ user, userEvents }) => {
             eventsThisMonth.push(parseInt(eventDate.getDate()));
         }
     })
-    // console.log('userEvents this month is: ', eventsThisMonth);
 
     return (
         //         <div className="inline-flex h-screen border-2 border-red-300 justify-center">

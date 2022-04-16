@@ -13,8 +13,6 @@ export const ProfilePage = ({ user }) => {
     backendUrl.search = new URLSearchParams({ userid: user.userid }).toString();
   }
 
-  console.log('user object is, ', user);
-
   useEffect(() => {
     fetch(backendUrl, {
       headers: {
@@ -23,14 +21,12 @@ export const ProfilePage = ({ user }) => {
     }).then(response => response.json())
       .then(data => {
         setUserEvents(data);
-        console.log("userEvents = ", userEvents);
       })
       .catch(err => {
         console.log(err);
       })
 
     // re-render page when the apiEvents object.
-    console.log("useEffect in savedEventsContainer is fired, reloaded page due to change in apiEvents")
   }, [JSON.stringify(userEvents)])
 
 

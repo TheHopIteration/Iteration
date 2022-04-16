@@ -1,6 +1,5 @@
 import React from 'react'
 import { SavedEventCard } from './SavedEventCard';
-import { useState, useEffect } from 'react';
 
 //savedEventsContainer holds individual event cards that display all event information
 //rendering the event cards fetched from the database
