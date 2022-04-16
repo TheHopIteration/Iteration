@@ -116,16 +116,37 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
           onPlaceSelected={(place) => {
             console.log('returned autocompleted place is: ', place);
           }}/>
-<div class="visible md:hidden"> 
-        Graphic Buttons
-</div>
 
-<div class="invisible md:visible" > 
+      <div class="flex visible md:hidden"> 
+        <button 
+            className="px-2 py-2 border-2 border-blue-400 text-blue-400 ml-1 font-semibold text-sm leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+
+          </button>
+
+          <button
+            onClick={() => {
+              onFind();
+            }}
+            className="px-2 py-2 border-2 border-blue-400 text-white bg-blue-500 ml-1 text-sm font-semibold leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="invisible md:visible" > 
           <button 
             className="px-4 py-2 border-2 border-blue-400 text-blue-400 ml-4 font-semibold text-sm leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
             type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
           >
-            More Options
+            Filter Events
           </button>
 
           <button
@@ -137,7 +158,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
           >
             Search Events
           </button>
-</div>
+        </div>
 
 
 
