@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from "./components/HomePage";
 import { LoginPage } from "./components/LoginPage";
@@ -7,8 +7,12 @@ import { ProfilePage } from "./components/ProfilePage";
 import { EditProfilePage } from "./components/EditProfilePage"
 import { Header } from "./components/Header";
 
+const UserContext = createContext();
+
 function App() {
   const [user, setUser] = useState({});
+
+  
 
   const sessionCheck = async () => {
     const response = await fetch("http://localhost:3000/auth", {
