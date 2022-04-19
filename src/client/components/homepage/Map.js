@@ -13,7 +13,7 @@ import { Circle, GoogleMap, Marker, MarkerClusterer, InfoWindow, useJsApiLoader 
 // pass info from each event into info window and marker - done
 
 const containerStyle = {
-    width: '90%',
+    width: '100%',
     height: '500px'
 };
 

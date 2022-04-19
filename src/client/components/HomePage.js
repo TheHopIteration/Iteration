@@ -32,20 +32,27 @@ export const HomePage = ({ user, setUser, setLoggingOut }) => {
 
   if (!isLoaded) return <div>Waiting for Google API to load ...</div>;
 
-//when you switch the second classname from flex relative to flex-col the map disappears
-
   return (
-    <div className="flex-col">
+    <div>
+      <div>
       <SearchBox apiEvents={apiEvents} setApiEvents={setApiEvents} setMapBase={setMapBase} mapRef={mapRef} setCircleRadius={setCircleRadius} />
-      {/* <div class = 'flex items-center justify-center'>
-        <Sidebar apiEvents={apiEvents} setApiEvents={setApiEvents} user={user} setMapBase={setMapBase} mapRef={mapRef} setCircleRadius={setCircleRadius} />
-      </div> */}
-
-      <div class = 'flex items-center justify-center'>
-        <Map apiEvents={apiEvents} mapBase={mapBase} mapRef={mapRef} circleRadius={circleRadius} />
       </div>
-      &nbsp;
-      <EventsContainer apiEvents={apiEvents} user={user} />
+
+      <div class="flex-col visible md:hidden items-center justify-center">
+        <div> 
+          <Map apiEvents={apiEvents} mapBase={mapBase} mapRef={mapRef} circleRadius={circleRadius} />
+          &nbsp;
+        </div>
+        <div>
+          <EventsContainer apiEvents={apiEvents} user={user} />
+        </div>
+      </div>
+
+      <div class = 'flex invisible md:visible justify-center'>
+        <Map apiEvents={apiEvents} mapBase={mapBase} mapRef={mapRef} circleRadius={circleRadius} />
+        <EventsContainer apiEvents={apiEvents} user={user}/>
+      </div>
+
       <Footer />
     </div>
   );
