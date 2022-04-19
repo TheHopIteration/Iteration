@@ -7,6 +7,7 @@ import { Button, Stack } from '@mui/material'
 export const ProfilePage = ({ user }) => {
   const [userEvents, setUserEvents] = useState([]);
 
+  console.log('User Object: ', user)
 // view status to handle what view we're in
 const [view, setView] = useState('list')
 // handle button clicks
