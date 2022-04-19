@@ -1,17 +1,21 @@
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
+import { CheckBox } from '@mui/icons-material';
+import { Switch } from '@mui/material';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
-export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents, index, timeConverter}) => {
+export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents, index, timeConverter, setEventRoute, eventRoute }) => {
     // const options = { }
-    // converts date string into a local date time format, removes the last 21 characters
-    
-
+    // converts date string into a local date time format, removes the last 21 character
     const link = `https://www.google.com/search?q=${event.title}+${event.address}`;
     // console.log(event.start_time);
     // console.log(startTime);
     // console.log(user);
     // console.log("event.id" - event.id);
+
+    const handleSwitchChange = () => {
+        setEventRoute([...eventRoute, event]);
+    };
 
     const deleteEvent = () => {
         fetch('http://localhost:3000/api/events', {
@@ -41,9 +45,20 @@ export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents,
                 <p className="text-gray-500">category: {event.category}</p>
                 <p className="text-gray-500">tags: {event.labels}</p>
                 <div className="flex space-x-2 justify-center">
+                    <Switch
+                        onChange={() => handleSwitchChange()}
+                    />
                     <a href={link} target="new">
-                        <SearchIcon className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-green-400 hover:bg-green-300" style={{ color: "blue", fontSize: 40 }} /></a>
-                    <DeleteRoundedIcon className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-red-500 hover:bg-red-400" onClick={() => deleteEvent()} style={{ color: "blue", fontSize: 40 }} />
+                        <SearchIcon
+                            className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-green-400 hover:bg-green-300"
+                            style={{ color: "blue", fontSize: 40 }}
+                        />
+                    </a>
+                    <DeleteRoundedIcon
+                        className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-red-500 hover:bg-red-400"
+                        onClick={() => deleteEvent()}
+                        style={{ color: "blue", fontSize: 40 }}
+                    />
                 </div>
             </div>
         </div>

@@ -1,13 +1,22 @@
 import React from 'react'
 import { SavedEventCard } from './SavedEventCard';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import Button from '@mui/material/Button';
 
 //savedEventsContainer holds individual event cards that display all event information
 //rendering the event cards fetched from the database
 
 
 export const SavedEventsContainer = ({ user, userEvents, setUserEvents }) => {
-
+    const [eventRoute, setEventRoute] = useState([]);
+    let link;
+    useEffect(() => {
+        console.log(eventRoute);
+        if (eventRoute.length !== 0) {
+            link = `https://www.google.com/maps/dir/?api=1&origin=37.7811,-122.4703&destination=${eventRoute[0].latitude},${eventRoute[0].longitude}&travelmode=driving`;
+            console.log(link);
+        }
+    }, [eventRoute]);
 
     return (
         <div className="flex w-full justify-center">
@@ -18,8 +27,27 @@ export const SavedEventsContainer = ({ user, userEvents, setUserEvents }) => {
                     <h4 className="text-gray-700 mt-3 text-xl leading-tight font-medium mb-4 flex-center">Please log in to see events</h4>
                 }
                 {JSON.stringify(userEvents) !== JSON.stringify({}) ? userEvents.map((event, index) => (
-                    <SavedEventCard index={index} event={event} cardId={index} key={index} user={user} userEvents={userEvents} setUserEvents={setUserEvents}></SavedEventCard>
-                )) : <div></div>}
+                    <SavedEventCard
+                        index={index}
+                        event={event}
+                        cardId={index}
+                        key={index}
+                        user={user}
+                        userEvents={userEvents}
+                        eventRoute={eventRoute}
+                        setUserEvents={setUserEvents}
+                        setEventRoute={setEventRoute}
+                    >
+                    </SavedEventCard>
+                )) : <div></div>
+                }
+                <a href={link} target="_blank">
+                    <Button
+                    >
+                        Routes
+                    </Button>
+                </a>
+
             </div>
         </div>
     )
