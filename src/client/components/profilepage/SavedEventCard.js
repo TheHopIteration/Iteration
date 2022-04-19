@@ -1,19 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { CheckBox } from '@mui/icons-material';
 import { Switch } from '@mui/material';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
-<<<<<<< HEAD
 export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents, index, timeConverter, setEventRoute, eventRoute }) => {
     // const options = { }
     // converts date string into a local date time format, removes the last 21 character
-=======
-export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents, index}) => {
-    // const options = { }
-    // converts date string into a local date time format, removes the last 21 characters
-
->>>>>>> f6ab0f33d6ccc99570bbc16a15bc9bd9ce8bcd77
+    const [toggle, setToggle] = useState(false);
     const link = `https://www.google.com/search?q=${event.title}+${event.address}`;
     // console.log(event.start_time);
     // console.log(startTime);
@@ -21,8 +15,23 @@ export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents,
     // console.log("event.id" - event.id);
 
     const handleSwitchChange = () => {
-        setEventRoute([...eventRoute, event]);
+        setToggle(!toggle);
     };
+
+    useEffect(() => {
+        if (toggle) {
+            //add event to routelist
+            setEventRoute([...eventRoute, event]);
+        };
+        if (eventRoute.length !== 0 && !toggle) {
+            for (let i = 0; i < eventRoute.length; i++) {
+                if (eventRoute[i].user_event_id === event.user_event_id) {
+                    eventRoute.splice(i, 1);
+                    setEventRoute([...eventRoute]);
+                }
+            }
+        };
+    }, [toggle]);
 
     const deleteEvent = () => {
         fetch('http://localhost:3000/api/events', {
