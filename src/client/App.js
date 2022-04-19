@@ -24,6 +24,7 @@ function App() {
 
   //run sessionCheck once upon render to update user state if user already logged in. Persists sessions
   useEffect(() => {
+    
     sessionCheck();
   }, []);
 

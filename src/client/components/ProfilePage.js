@@ -5,7 +5,8 @@ import { Button, Stack } from '@mui/material'
 
 
 export const ProfilePage = ({ user }) => {
-  const [userEvents, setUserEvents] = useState([]);
+  const [eventsUserId, setEventsUserId] = useState([user.userid]);
+  const [friends, setFriends] = useState([]) ;
 
   console.log('User Object: ', user)
 // view status to handle what view we're in
@@ -21,11 +22,20 @@ const handleList = (e) => {
   setView('list')
 }
 
+const handleUserChange = (e) => {
+  setEventsUserId(e.target.value)
+};
+
 
 
   let backendUrl = new URL("http://localhost:3000/api/events");
   if (JSON.stringify(user) !== JSON.stringify({})) {
     backendUrl.search = new URLSearchParams({ userid: user.userid }).toString();
+  }
+
+  let backendFriendsUrl = new URL("http://localhost:3000/api/friends");
+  if (JSON.stringify(user) !== JSON.stringify({})) {
+    backendFriendsUrl.search = new URLSearchParams({ userid: eventsUserId }).toString();
   }
 
   useEffect(() => {
@@ -45,6 +55,18 @@ const handleList = (e) => {
   }, [JSON.stringify(userEvents)])
 
 
+  fetch(backendFriendsUrl, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(response => response.json())
+    .then(data => {
+      console.log(`FRIENDS DATA: ${data}`);
+      setFriends(data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
 
 
   return (

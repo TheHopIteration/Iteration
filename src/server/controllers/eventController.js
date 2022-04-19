@@ -1,5 +1,4 @@
 const db = require("../models/dataModels");
-const pgp = require("pg-promise");
 
 const eventController = {};
 

@@ -9,9 +9,10 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 
 // routers
+const sessionRouter = require("./routes/sessionRouter.js");
 const userRouter = require("./routes/userRouter.js");
 const eventRouter = require("./routes/eventRouter.js");
-const sessionRouter = require("./routes/sessionRouter.js");
+const friendRouter = require("./routes/friendRouter.js");
 
 // express
 const PORT = process.env.PORT || 3000;
@@ -65,9 +66,11 @@ app.use(
 );
 
 // define route handlers
+app.use("/auth", sessionRouter);
 app.use("/api/users", userRouter);
 app.use("/api/events", eventRouter);
-app.use("/auth", sessionRouter);
+app.use("/api/friends", friendRouter);
+
 
 // home
 app.get("/", (req, res) => {
