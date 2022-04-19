@@ -11,7 +11,7 @@ export const Viewcomponent = ({ user, userEvents, setUserEvents, view }) => {
     // convert timezones of our userevents
     const timeConverter = (datetime) => {
         const date = new Date(datetime);
-        return date.toLocaleString("en-US", { timeZone: "America/Los_Angeles", timeZoneName: "short" })
+        return date.toLocaleString("en-US", { timeZoneName: "short" })
     }
 
     useEffect(() => {
