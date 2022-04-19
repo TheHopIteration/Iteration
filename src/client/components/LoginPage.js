@@ -8,7 +8,7 @@ export const LoginPage = ({ user, sessionCheck }) => {
 
     const navHome = () => {
         navigate("/");
-    };
+    }; 
 
     useEffect(() => {
         if (JSON.stringify(user) !== JSON.stringify({})) {
@@ -35,12 +35,6 @@ export const LoginPage = ({ user, sessionCheck }) => {
                 }
                 else {
                     alert('Wrong password!');
-                }
-            })
-            .then(res => res.JSON())
-            .then(res => {
-                if (res.isLoggedIn) {
-                    setUser(response.user)
                 }
             })
             .catch(err => {

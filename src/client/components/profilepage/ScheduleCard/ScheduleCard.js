@@ -11,12 +11,11 @@ export const ScheduleCard = ({ user, userEvents, setUserEvents }) => {
 
 
     const [eventsToday, setEvents] = React.useState([])
-
+    const [chosenDate, setDate] = React.useState('')
     // function to convert timezones
-    const timeConverter = (datetime) => {
+    const timeConverterCalendar = (datetime) => {
         const date = new Date(datetime);
         return date.toLocaleString("en-US", { timeZone: "America/Los_Angeles", timeZoneName: "short" })
-            ;
     }
 
 
@@ -25,35 +24,35 @@ export const ScheduleCard = ({ user, userEvents, setUserEvents }) => {
     // will filter out a list of pulled dates 
     const pickDate = (val) => {
         setEvents()
+        console.log('Running pickDate')
         // when selecting a date, build a new array of events with dates matching selected date
+        // convert the userevent times in our event router thing
+        const eveArr = [];
         for (let i = 0; i < userEvents.length; i++){
-            const eveArr = [];
-            if (timeConverter(val.toISOString()).slice(0,8) === timeConverter(userEvents[i].start_time).slice(0,8)){
-                userEvents[i].start_time=timeConverter(userEvents[i].start_time)
+            if (timeConverterCalendar(val.toISOString()).slice(0,8) === userEvents[i].start_time.slice(0,8)){
+                // userEvents[i].start_time=timeConverter(userEvents[i].start_time)
                 eveArr.push(userEvents[i])
-                setEvents([...eveArr])
             }
         }
+        setEvents([...eveArr])
+        setDate(timeConverterCalendar(val.toISOString()).slice(0,8))
     }
 
     // render the EventsDisplay on load
     useEffect(() => {
         pickDate(new Date())
-    }, []);
-
+    }, [])
+    
     return (
-
-
-        <div className="flex items-center bg-gray-100 justify-center h-full">
-           <Box
+           <Container
                 className="calendarcontainer"
                 sx = {
                     {p:2}
                 }
                 >
                 <Calendar onChange={pickDate}/>
-                <EventsDisplay user={user} eventsToday={eventsToday} setUserEvents={setUserEvents} timeConverter={timeConverter} />
-            </Box>
-        </div>
+                <EventsDisplay user={user} eventsToday={eventsToday} setUserEvents={setUserEvents} chosenDate={chosenDate} />
+            </Container>
+
     )
 }

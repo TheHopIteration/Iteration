@@ -4,9 +4,16 @@ import { CheckBox } from '@mui/icons-material';
 import { Switch } from '@mui/material';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
+<<<<<<< HEAD
 export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents, index, timeConverter, setEventRoute, eventRoute }) => {
     // const options = { }
     // converts date string into a local date time format, removes the last 21 character
+=======
+export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents, index}) => {
+    // const options = { }
+    // converts date string into a local date time format, removes the last 21 characters
+
+>>>>>>> f6ab0f33d6ccc99570bbc16a15bc9bd9ce8bcd77
     const link = `https://www.google.com/search?q=${event.title}+${event.address}`;
     // console.log(event.start_time);
     // console.log(startTime);
@@ -38,7 +45,7 @@ export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents,
     }
     return (
         <div className="flex justify-center mb-4">
-            <div className="block px-6 py-4 rounded-lg shadow-lg w-1/2 bg-white">
+            <div className="block px-6 py-4 rounded-lg shadow-lg w-1/2 bg-white min-w-full">
                 <h5 className="text-gray-600 text-xl leading-tight font-semibold">{index + 1}. {event.title}</h5>
                 <p className="text-gray-600 text-base ">{event.start_time}</p>
                 <p>{event.address}</p>

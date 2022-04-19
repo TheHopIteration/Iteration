@@ -4,12 +4,14 @@ import { HomePage } from "./components/HomePage";
 import { LoginPage } from "./components/LoginPage";
 import { SignupPage } from "./components/SignupPage";
 import { ProfilePage } from "./components/ProfilePage";
+import { EditProfilePage } from "./components/EditProfilePage"
 import { Header } from "./components/Header";
 
 const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState({});
+<<<<<<< HEAD
   // const [loggingOut, setLoggingOut] = useState(false);
 
   // useEffect(() => {
@@ -52,6 +54,8 @@ function App() {
   //     console.log('logging out')
   //   }
   // }, [document.location.href, loggingOut]);
+=======
+>>>>>>> f6ab0f33d6ccc99570bbc16a15bc9bd9ce8bcd77
 
   
 
@@ -61,15 +65,20 @@ function App() {
     })
       .then((res) => res.json())
       .then((response) => {
-        console.log("returned response from auth is:", response);
         if (response.isLoggedIn) {
           setUser(response.user);
         }
       });
   };
 
+  //run sessionCheck once upon render to update user state if user already logged in. Persists sessions
+  useEffect(() => {
+    sessionCheck();
+  }, []);
+
   return (
     <BrowserRouter>
+<<<<<<< HEAD
       <UserContext.Provider value={user}>
         <Header user={user} setUser={setUser} />
         <Routes>
@@ -94,6 +103,38 @@ function App() {
         </Routes>
       </UserContext.Provider>
 
+=======
+    <Header user={user} setUser={setUser}/>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <HomePage
+              user={user}
+            />
+          }
+        ></Route>
+        <Route path="/login" element={<LoginPage user={user} sessionCheck={sessionCheck}/>}></Route>
+        <Route path="/signup" element={<SignupPage />}></Route>
+        <Route
+          path="/profile"
+          element={
+            <ProfilePage
+              user={user}
+            />
+          }
+        ></Route>
+        <Route
+          path="/editProfile"
+          element={
+            <EditProfilePage
+              user={user}
+              setUser={setUser}
+            />
+          }
+        ></Route>
+      </Routes>
+>>>>>>> f6ab0f33d6ccc99570bbc16a15bc9bd9ce8bcd77
     </BrowserRouter>
   );
 }
