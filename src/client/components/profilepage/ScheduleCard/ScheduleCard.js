@@ -15,7 +15,7 @@ export const ScheduleCard = ({ user, userEvents, setUserEvents }) => {
     // function to convert timezones
     const timeConverterCalendar = (datetime) => {
         const date = new Date(datetime);
-        return date.toLocaleString("en-US", { timeZone: "America/Los_Angeles", timeZoneName: "short" })
+        return date.toLocaleString("en-US", { timeZoneName: "short" })
     }
 
 
@@ -29,13 +29,13 @@ export const ScheduleCard = ({ user, userEvents, setUserEvents }) => {
         // convert the userevent times in our event router thing
         const eveArr = [];
         for (let i = 0; i < userEvents.length; i++){
-            if (timeConverterCalendar(val.toISOString()).slice(0,8) === userEvents[i].start_time.slice(0,8)){
+            if (timeConverterCalendar(val.toISOString()).split(',')[0] === userEvents[i].start_time.split(',')[0]){
                 // userEvents[i].start_time=timeConverter(userEvents[i].start_time)
                 eveArr.push(userEvents[i])
             }
         }
         setEvents([...eveArr])
-        setDate(timeConverterCalendar(val.toISOString()).slice(0,8))
+        setDate(timeConverterCalendar(val.toISOString()).split(',')[0])
     }
 
     // render the EventsDisplay on load
