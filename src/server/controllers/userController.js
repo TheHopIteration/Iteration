@@ -56,27 +56,19 @@ userController.createUser = async (req, res, next) => {
     });
   }
   try {
-    const { username, password, email } = req.body;
+    const { username, password, email, firstName, lastName, address } = req.body;
 
-    if (!username || !password) {
-      return next("Missing username or password in userController.createUser");
-    }
-    const sqlQuery = !email
-      ? `
-        INSERT INTO users (username, password)
-        VALUES ($1, $2) ON CONFLICT DO NOTHING
-        RETURNING userid, username, email, home_location
-            `
-      : `
-        INSERT INTO users (username, password, email)
-        VALUES ($1, $2, $3) ON CONFLICT DO NOTHING
-        RETURNING userid, username, email, home_location
-            `;
+    
+    const sqlQuery =
+        `
+        INSERT INTO users (username, password, email, first_name, last_name, home_location)
+        VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING
+        `;
 
     let salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
     let hash = bcrypt.hashSync(password, salt);
 
-    const params = !email ? [username, hash] : [username, hash, email];
+    const params = [username, hash, email, firstName, lastName, address];
 
     const data = await db.query(sqlQuery, params);
     res.locals.createUser = data.rows[0];
