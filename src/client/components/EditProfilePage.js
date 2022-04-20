@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 // const db = require("../models/dataModels");
 
 
 export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
-  const [inputs, setInputs] = useState({});
-  
-  useEffect(() => {
-    //need to get user data from user.userid
-    // const sqlQuery = `
-    //   SELECT first_name, last_name, email, home_location
-    //   FROM "public"."users"
-    //   WHERE userid = $1;
-    // `
-    // const params = [user.userid];
-    // const data = db.query(sqlQuery, params);
-    // console.log(data);
+  let navigate = useNavigate();
+
+  const [inputs, setInputs] = useState({
+    firstName: user.first_name,
+    lastName: user.last_name,
+    email: user.email,
+    address: user.home_location,
   })
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setInputs(values => ({...values, [name]: value}))
+  const handleInputChange = (e) => {
+    setInputs({...inputs, [e.target.name]: e.target.value})
   }
 
   const handleSubmit = (e) => {
@@ -31,7 +25,16 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
         'Content-Type': 'application/json'
       },
       credentials: "include",
-      body: JSON.stringify({ "firstName": inputs.firstName, "lastName": inputs.lastName, "email": inputs.email, "homeLocation": inputs.homeLocation}),
+      body: JSON.stringify({ "firstName": inputs.firstName, "lastName": inputs.lastName, "email": inputs.email, "homeLocation": inputs.address}),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      setUser(data);
+      navigate("/");
+      // window.location.reload(false);
+    })
+    .catch(err => {
+        console.log(err);
     })
   }
 
@@ -40,7 +43,7 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
   <form onSubmit={handleSubmit}>
   <div className="form-group mb-6">
       <label htmlFor="firstName" className="form-label inline-block mb-2 text-gray-700">First name</label>
-      <input type="text" name="firstName" value={inputs.firstName || ""} onChange={handleChange} className="form-control
+      <input type="text" name="firstName" defaultValue={user.first_name || ""} onChange={handleInputChange} className="form-control
         block
         w-full
         px-3
@@ -55,11 +58,12 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputEmail1"
-        placeholder="First name..."/>
+        placeholder='First name'
+        />
     </div>
     <div className="form-group mb-6">
       <label htmlFor="lastName" className="form-label inline-block mb-2 text-gray-700">Last name</label>
-      <input type="text" name="lastName" value={inputs.lastName || ""} onChange={handleChange} className="form-control
+      <input type="text" name="lastName" defaultValue={user.last_name || ""} onChange={handleInputChange} className="form-control
         block
         w-full
         px-3
@@ -74,11 +78,12 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputEmail1"
-        placeholder="Last name..."/>
+        placeholder="Last name"
+        />
     </div>
     <div className="form-group mb-6">
       <label htmlFor="inputEmail" className="form-label inline-block mb-2 text-gray-700">Email address</label>
-      <input type="email" name="email" value={inputs.email || ""} onChange={handleChange} className="form-control
+      <input type="email" name="email" defaultValue={user.email || ""} onChange={handleInputChange} className="form-control
         block
         w-full
         px-3
@@ -93,11 +98,11 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputEmail1"
-        aria-describedby="emailHelp" placeholder="Email address..."/>
+        aria-describedby="emailHelp"/>
     </div>
     <div className="form-group mb-6">
       <label htmlFor="inputAddress" className="form-label inline-block mb-2 text-gray-700">Home address</label>
-      <input type="text" name="homeLocation" value={inputs.homeLocation || ""} onChange={handleChange} className="form-control
+      <input type="text" name="address" defaultValue={user.home_location || ""} onChange={handleInputChange} className="form-control
         block
         w-full
         px-3
@@ -112,7 +117,8 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputEmail1"
-        placeholder="Enter address..."/>
+        placeholder='Address'
+        />
     </div>
     <button type="submit" onClick={handleSubmit} className="
       px-6

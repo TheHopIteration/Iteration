@@ -96,6 +96,13 @@ userController.updateUser = async (req, res, next) => {
       searchArray.push(db.query(updateQuery, params))
     }
     await Promise.all(searchArray);
+    const params = [req.params.id];
+    const sqlQuery = `
+          SELECT userid, username, email, home_location, first_name, last_name FROM users 
+          WHERE userid = $1
+          `;
+    const data = await db.query(sqlQuery, params);
+    res.locals.getUser = data.rows[0] ? data.rows[0] : null;
     return next();
   }
   catch (err) {
