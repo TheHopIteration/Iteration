@@ -6,6 +6,7 @@ import {Container, Button, Box, Stack} from '@mui/material'
 
 // import EventsDisplay
 import { EventsDisplay } from './EventsDisplay'
+import { SavedEventsContainer } from '../ListView/SavedEventsContainer'
 
 export const ScheduleCard = ({ user, userEvents, setUserEvents }) => {
 
@@ -51,7 +52,7 @@ export const ScheduleCard = ({ user, userEvents, setUserEvents }) => {
                 }
                 >
                 <Calendar onChange={pickDate}/>
-                <EventsDisplay user={user} eventsToday={eventsToday} setUserEvents={setUserEvents} chosenDate={chosenDate} />
+                <SavedEventsContainer user={user} userEvents={eventsToday} setUserEvents={setUserEvents} chosenDate={chosenDate} />
             </Container>
 
     )
