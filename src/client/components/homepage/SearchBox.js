@@ -71,23 +71,42 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
     };
     // make a get request to predictHQ and save the data in the apiEvents state
     const events = await fetch(url, eventAPIHeader)
-      .then((response) => response.json())
-      .then((data) => {
-        data.results.forEach((event) => {
-          console.log(`EVENT: ${JSON.stringify(event)}`)
-          if (event.location) {
-            event.location[0] += Math.pow(10, -4) * (Math.random() * (1 - (-1)) - 1)
-            event.location[1] += Math.pow(10, -4) * (Math.random() * (1 - (-1)) - 1)
-          }
-        })
-        console.log('returned data from predictHQ api is:', data.results);
-
-        setApiEvents(data.results);
+    .then((response) => response.json())
+    .then((data) => {
+      data.results.forEach((event) => {
+        console.log(`EVENT: ${JSON.stringify(event)}`)
+        if (event.location) {
+          event.location[0] += Math.pow(10, -4) * (Math.random() * (1 - (-1)) - 1)
+          event.location[1] += Math.pow(10, -4) * (Math.random() * (1 - (-1)) - 1)
+        }
+        if (JSON.stringify(user) !== '{}') {
+          //fetch distance from home 
+          event.distanceFromHome = calculateDistance(user.home_location, event.address);
+        }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      console.log('returned data from predictHQ api is:', data.results);
+
+      setApiEvents(data.results);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const calculateDistance = (origin, destination) => {
+  const service = new google.maps.DistanceMatrixService();
+  const request = {
+    origins: [origin],
+    destinations: [destination],
+    travelMode: google.maps.TravelMode.DRIVING,
+    avoidHighways: false,
+    avoidTolls: false,
   };
+  service.getDistanceMatrix(request)
+  .then(res => res.json())
+  .then(data => console.log(data))
+};
+
   // Search Box className="flex bg-slate-50 flex-col justify-center items-center w-full p-5 pl-2 pb-2"
 
   return (
