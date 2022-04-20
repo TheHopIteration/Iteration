@@ -4,8 +4,7 @@ import 'react-calendar/dist/Calendar.css'
 import './schedulecard.css'
 import {Container, Button, Box, Stack} from '@mui/material'
 
-// import EventsDisplay
-import { EventsDisplay } from './EventsDisplay'
+// import events container
 import { SavedEventsContainer } from '../ListView/SavedEventsContainer'
 
 export const ScheduleCard = ({ user, userEvents, setUserEvents }) => {
