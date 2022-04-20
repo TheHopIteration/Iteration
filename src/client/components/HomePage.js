@@ -1,11 +1,11 @@
 import React from "react";
-
-import { Sidebar } from "./homepage/Sidebar";
 import { Map } from "./homepage/Map";
 import { Footer } from "./Footer";
 import { useState, useEffect, useRef } from "react";
 import { useJsApiLoader } from '@react-google-maps/api';
 import { useLocation } from "react-router-dom";
+import { SearchBox } from './homepage/SearchBox';
+import { EventsContainer } from './homepage/EventsContainer'
 
 
 
@@ -32,13 +32,20 @@ export const HomePage = ({ user }) => {
   }, [apiEvents.length, location])
 
   if (!isLoaded) return <div>Waiting for Google API to load ...</div>;
+
   return (
-    <div className="flex-col">
-      <div className="flex relative">
-        <Sidebar apiEvents={apiEvents} setApiEvents={setApiEvents} user={user} setMapBase={setMapBase} mapRef={mapRef} setCircleRadius={setCircleRadius} />
-        <Map apiEvents={apiEvents} mapBase={mapBase} mapRef={mapRef} circleRadius={circleRadius} />
+    <div> 
+      <div> 
+      <SearchBox apiEvents={apiEvents} setApiEvents={setApiEvents} setMapBase={setMapBase} mapRef={mapRef} setCircleRadius={setCircleRadius} />
       </div>
+
+      <div className = "flex flex-col md:flex-row">
+        <Map apiEvents={apiEvents} mapBase={mapBase} mapRef={mapRef} circleRadius={circleRadius} />
+        <EventsContainer apiEvents={apiEvents} user={user}/>
+      </div>
+
       <Footer />
     </div>
   );
+
 };

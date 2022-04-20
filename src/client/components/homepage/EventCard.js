@@ -62,8 +62,8 @@ export const EventCard = ({ event, cardId, user, num }) => {
     }
 
     return (
-        <div className="flex justify-center">
-            <div className="rounded-lg shadow-lg bg-white w-[44vh]">
+        <div className="flex justify-center items-center w-72">
+            <div className="rounded-lg shadow-lg bg-white">
                 {/* <a href="#!">
                     <img className="rounded-t-lg" src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" alt="" />
                 </a> */}
