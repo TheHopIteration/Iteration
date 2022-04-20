@@ -33,22 +33,12 @@ export const HomePage = ({ user, setUser, setLoggingOut }) => {
   if (!isLoaded) return <div>Waiting for Google API to load ...</div>;
 
   return (
-    <div>
-      <div>
+    <div> 
+      <div> 
       <SearchBox apiEvents={apiEvents} setApiEvents={setApiEvents} setMapBase={setMapBase} mapRef={mapRef} setCircleRadius={setCircleRadius} />
       </div>
 
-      <div class="flex-col visible md:hidden items-center justify-center">
-        <div> 
-          <Map apiEvents={apiEvents} mapBase={mapBase} mapRef={mapRef} circleRadius={circleRadius} />
-          &nbsp;
-        </div>
-        <div>
-          <EventsContainer apiEvents={apiEvents} user={user} />
-        </div>
-      </div>
-
-      <div class = 'flex invisible md:visible justify-center'>
+      <div className = "flex flex-col md:flex-row">
         <Map apiEvents={apiEvents} mapBase={mapBase} mapRef={mapRef} circleRadius={circleRadius} />
         <EventsContainer apiEvents={apiEvents} user={user}/>
       </div>

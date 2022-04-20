@@ -141,7 +141,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
           </button>
         </div>
 
-        <div class="invisible md:visible" > 
+        <div className="invisible md:visible" > 
           <button 
             className="px-4 py-2 border-2 border-blue-400 text-blue-400 ml-4 font-semibold text-sm uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
             type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
