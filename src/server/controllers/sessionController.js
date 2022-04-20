@@ -33,8 +33,6 @@ sessionController.verifyUser = async (req, res, next) => {
     if (verification) {
       req.session.authenticated = true;
       req.session.user = res.locals.getUser;
-      console.log(username + " logged in");
-      console.log(req.session);
       return next();
     } else
       return next({
@@ -55,7 +53,6 @@ sessionController.logout = async (req, res, next) => {
     return next({ log: "Not logged in", message: "Not logged in" });
 
   const logoutHelper = () => {
-    console.log("user session is :", req.session.user.username);
     const username = req.session.user.username;
     
     res.clearCookie("userID", { path: "/" });
@@ -71,7 +68,6 @@ sessionController.logout = async (req, res, next) => {
       }
       res.clearCookie("userID", { path: "/" });
       res.clearCookie("connect.sid", { path: "/" });
-      console.log(username + " logged out.");
       return next();
     });
   };

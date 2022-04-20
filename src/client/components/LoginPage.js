@@ -1,15 +1,21 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 
-export const LoginPage = ({ reRender }) => {
+export const LoginPage = ({ user, sessionCheck }) => {
     let navigate = useNavigate();
-    const location = useLocation();
+
+    const navHome = () => {
+        navigate("/");
+    }; 
 
     useEffect(() => {
-        // console.log('rerender');
-    }, [location]);
+        if (JSON.stringify(user) !== JSON.stringify({})) {
+          navHome();
+        }
+      }, [user]);
+
 
     const verifyUser = () => {
         let username = document.getElementById("usernameLoginForm").value;
@@ -25,8 +31,7 @@ export const LoginPage = ({ reRender }) => {
             .then(response => response.json())
             .then(user => {
                 if (user.username === username) {
-                    navigate('/');
-                    window.location.reload(false);
+                    sessionCheck()
                 }
                 else {
                     alert('Wrong password!');

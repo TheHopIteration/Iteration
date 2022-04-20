@@ -1,53 +1,53 @@
 import React from "react";
 import regeneratorRuntime from "regenerator-runtime";
 import AutoComplete from "react-google-autocomplete";
-// import { Autocomplete } from '@react-google-maps/api';
 
 export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCircleRadius }) => {
-  const apiKey = process.env.PREDICTHQ_API_KEY;
-  // today's date for filling in default value of date input boxes in options
   let todayDate = new Date().toISOString().slice(0, 10);
-
-  // function to check which categories are checked, returns an array of categories
-  const getCheckedCategories = () => {
-    const arr = [];
-    const checked = document.querySelectorAll('input[type=checkbox]:checked');
-    for (const c of checked) {
-      arr.push(c.value);
-    }
-    return arr.length ? arr.join(', ') : '';
-  }
-
-  let latitude, longitude;
+  
   const onFind = async () => {
-    // TODO check if location is entered, if not return a modal error
     let location = document.getElementById("locationForm").value;
     if (location === '') {
       alert("Please enter a valid location");
-      // document.getElementById("noLocationModal").classList.remove('hidden');
       return;
     }
-
+    
     // geocode entered address using google geocoding api
     let geocodingUrl = new URL('https://maps.googleapis.com/maps/api/geocode/json')
     let geocodingParams = { address: location, key: process.env.GOOGLE_MAPS }
     geocodingUrl.search = new URLSearchParams(geocodingParams).toString();
     let geocodedAddress = await fetch(geocodingUrl).then(res => res.json());
-
+    
     // pull latitude and longitude from results of geocoding api
+    let latitude, longitude;
     latitude = geocodedAddress.results[0].geometry.location.lat;
     longitude = geocodedAddress.results[0].geometry.location.lng;
-    // console.log(`latitude is ${latitude}, longitude is ${longitude}`);
+    // update mapBase state with resulting lat/long
     setMapBase({ lat: latitude, lng: longitude });
-
-    // by default radius is set to 10 miles
+    
+    // by default radius is set to 5 miles
     let radius = document.getElementById("radiusForm").value;
     setCircleRadius(radius);
-
+    
     // by default the start and end date are today's date
     let startDate = document.getElementById("startDateForm").value;
     let endDate = document.getElementById("endDateForm").value;
+    
 
+
+    //**SETUP AND MAKE CALL FOR EVENTS */
+    const apiKey = process.env.PREDICTHQ_API_KEY;
+    // today's date for filling in default value of date input boxes in options
+    
+    // function to check which categories are checked, returns an array of categories
+    const getCheckedCategories = () => {
+      const arr = [];
+      const checked = document.querySelectorAll('input[type=checkbox]:checked');
+      for (const c of checked) {
+        arr.push(c.value);
+      }
+      return arr.length ? arr.join(', ') : '';
+    }
     // params for calling predictHQ api
     const eventParams = {
       category: getCheckedCategories(),
@@ -56,15 +56,10 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
       within: radius + "mi@" + latitude + "," + longitude,
       limit: 25,
     };
-    // add category key if categorie(s) is checked by user
-    // const categories = getCheckedCategories();
-    // if (categories !== '') eventParams['category'] = categories;
-
     let url = new URL("https://api.predicthq.com/v1/events");
     url.search = new URLSearchParams(eventParams).toString();
-
     //headers for predictHQ get request
-    const eventAPIParams = {
+    const eventAPIHeader = {
       method: "GET",
       headers: {
         Authorization: "Bearer " + apiKey,
@@ -74,13 +69,12 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
           "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
       },
     };
-
     // make a get request to predictHQ and save the data in the apiEvents state
-    const events = await fetch(url, eventAPIParams)
+    const events = await fetch(url, eventAPIHeader)
       .then((response) => response.json())
       .then((data) => {
-        // console.log('returned data is:', data.results);
         data.results.forEach((event) => {
+          console.log(`EVENT: ${JSON.stringify(event)}`)
           if (event.location) {
             event.location[0] += Math.pow(10, -4) * (Math.random() * (1 - (-1)) - 1)
             event.location[1] += Math.pow(10, -4) * (Math.random() * (1 - (-1)) - 1)
@@ -93,8 +87,6 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
       .catch((err) => {
         console.log(err);
       });
-    // console.log("returned events is: ", events);
-    // if (Object.keys(events).length > 0) setApiEvents(events);
   };
   // Search Box className="flex bg-slate-50 flex-col justify-center items-center w-full p-5 pl-2 pb-2"
 

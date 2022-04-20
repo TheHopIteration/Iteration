@@ -5,22 +5,24 @@ import { useNavigate } from 'react-router-dom';
 export const SignupPage = () => {
 
     let navigate = useNavigate();
-    
+
     const createUser = () => {
         let username = document.getElementById("usernameCreateUserForm").value;
+        let firstName = document.getElementById("firstNameCreateUserForm").value;
+        let lastName = document.getElementById("lastNameCreateUserForm").value;
+        let address = document.getElementById("addressCreateUserForm").value;
         let password = document.getElementById("passwordCreateUserForm").value;
         let email = document.getElementById("emailCreateUserForm").value;
+
         fetch('http://localhost:3000/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             credentials: "include",
-            body: JSON.stringify({ "username": username, "password": password, "email": email }),
+            body: JSON.stringify({ "username": username, "password": password, "email": email, "firstName": firstName, "lastName": lastName, "address": address }),
         }).then(async (response) => {
             if (response.status === 200) {
-                // const user = await response.json();
-                // setUser(user);
                 navigate("/");
                 window.location.reload(false);
             } else {
@@ -38,7 +40,7 @@ export const SignupPage = () => {
                 <div className="flex xl:justify-center lg:justify-between justify-center items-center
             flex-wrap h-full g-6 bg-gray-50">
                     <div className="xl:w-3/12 lg:w-4/12 md:w-5/12">
-                        <form className='bg-gradient-to-r from-orange-100 to-green-100  p-4 rounded-lg border-2 border-gray-200 shadow-lg'>
+                        <form onSubmit={() => createUser()} className='bg-gradient-to-r from-orange-100 to-green-100  p-4 rounded-lg border-2 border-gray-200 shadow-lg'>
                             <div
                                 className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
                             >
@@ -49,7 +51,8 @@ export const SignupPage = () => {
                                     type="text"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     id="usernameCreateUserForm"
-                                    placeholder="New Username"
+                                    placeholder="Username"
+                                    required
                                 />
                             </div>
 
@@ -59,6 +62,37 @@ export const SignupPage = () => {
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     id="passwordCreateUserForm"
                                     placeholder="New Password"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-6">
+                                <input
+                                    type="text"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="firstNameCreateUserForm"
+                                    placeholder="First Name"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-6">
+                                <input
+                                    type="text"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="lastNameCreateUserForm"
+                                    placeholder="Last Name"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-6">
+                                <input
+                                    type="text"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="addressCreateUserForm"
+                                    placeholder="Home address"
+                                    required
                                 />
                             </div>
 
@@ -67,15 +101,15 @@ export const SignupPage = () => {
                                     type="text"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     id="emailCreateUserForm"
-                                    placeholder="Email Address"
+                                    placeholder="Email"
+                                    required
                                 />
                             </div>
 
                             <div className="text-center lg:text-left">
                                 <button
-                                    type="button"
+                                    type="submit"
                                     className="inline-block mb-4 px-7 py-3 bg-green-600 text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                                    onClick={() => createUser()}
                                 >
                                     Create Account
                                 </button>

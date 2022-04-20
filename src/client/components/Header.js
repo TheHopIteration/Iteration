@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-export const Header = ({ user, setUser, setLoggingOut }) => {
+export const Header = ({ user, setUser }) => {
   const location = useLocation();
   let navigate = useNavigate();
 
@@ -18,13 +18,38 @@ export const Header = ({ user, setUser, setLoggingOut }) => {
     navigate("/");
   };
 
+  const editProfile = () => {
+    navigate("/editProfile")
+  }
+
   const logout = () => {
-    setLoggingOut(true);
-    setUser({});
-    navHome();
+    fetch("http://localhost:3000/auth/logout", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ username: user.username, userid: user.userid }),
+    })
+      .then((res) => {
+        setUser({})
+      })
+      .catch((err) => {console.log(err)});
   };
 
-  // console.log("user is", user);
+
+  useEffect(() => {
+    if (JSON.stringify(user) === JSON.stringify({})) {
+      navHome();
+    }
+  }, [user]);
+
+
+
+
+  const initLogout = () => {
+    logout();
+  };
 
   return (
     <nav className="bg-gradient-to-r from-green-600 to-green-500 h-20 drop-shadow-xl relative z-50">
@@ -199,6 +224,27 @@ export const Header = ({ user, setUser, setLoggingOut }) => {
                         Home Page
                       </a>
                     </li>}
+                    <li>
+                    <a
+                      className="
+              dropdown-item
+              text-sm
+              py-2
+              px-4
+              font-normal
+              block
+              w-full
+              whitespace-nowrap
+              bg-transparent
+              text-gray-700
+              hover:bg-gray-100
+            "
+                      href="#"
+                      onClick={() => editProfile()}
+                    >
+                      Edit Profile
+                    </a>
+                  </li>
                   <li>
                     <a
                       className="
@@ -215,7 +261,7 @@ export const Header = ({ user, setUser, setLoggingOut }) => {
               hover:bg-gray-100
             "
                       href="#"
-                      onClick={() => logout()}
+                      onClick={() => initLogout()}
                     >
                       Logout
                     </a>

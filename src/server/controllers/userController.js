@@ -14,7 +14,7 @@ userController.getUser = async (req, res, next) => {
     }
 
     const sqlQuery = `
-          SELECT userid, username, email, home_location FROM users 
+          SELECT userid, username, email, home_location, first_name, last_name FROM users 
           WHERE username = $1
           `;
 
@@ -56,27 +56,19 @@ userController.createUser = async (req, res, next) => {
     });
   }
   try {
-    const { username, password, email } = req.body;
+    const { username, password, email, firstName, lastName, address } = req.body;
 
-    if (!username || !password) {
-      return next("Missing username or password in userController.createUser");
-    }
-    const sqlQuery = !email
-      ? `
-        INSERT INTO users (username, password)
-        VALUES ($1, $2) ON CONFLICT DO NOTHING
-        RETURNING userid, username, email, home_location
-            `
-      : `
-        INSERT INTO users (username, password, email)
-        VALUES ($1, $2, $3) ON CONFLICT DO NOTHING
-        RETURNING userid, username, email, home_location
-            `;
+    
+    const sqlQuery =
+        `
+        INSERT INTO users (username, password, email, first_name, last_name, home_location)
+        VALUES ($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING
+        `;
 
     let salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
     let hash = bcrypt.hashSync(password, salt);
 
-    const params = !email ? [username, hash] : [username, hash, email];
+    const params = [username, hash, email, firstName, lastName, address];
 
     const data = await db.query(sqlQuery, params);
     res.locals.createUser = data.rows[0];
@@ -90,77 +82,30 @@ userController.createUser = async (req, res, next) => {
 };
 
 userController.updateUser = async (req, res, next) => {
-  if (!res.locals.getUser) {
-    return next("This user does not exist");
-  }
-  if (!req.body.username && !req.body.newPassword && !req.body.email) {
-    return next("At least one field is required to update");
-  }
-
   try {
-    const passQuery = `
-      SELECT password FROM users
-      WHERE username = $1
-    `;
-    let dbPassword;
-    await db.query(passQuery, [req.params.id]).then((data) => {
-      dbPassword = data.rows[0].password;
-    });
-
-    const password = req.body.password ? req.body.password : null;
-    const newPassword = req.body.newPassword ? req.body.newPassword : null;
-    const email = req.body.email ? req.body.email : null;
-    const newUsername = req.body.newUsername ? req.body.newUsername : null;
-    const username = req.params.id;
-
-    if (password && newPassword) {
-      let verification = bcrypt.compareSync(password, dbPassword);
-
-      if (!verification) return next("Invalid old password");
-
-      const salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
-      const hash = bcrypt.hashSync(newPassword, salt);
-      const params = [username, hash];
+    const { email, firstName, lastName, homeLocation } = req.body;
+    const allUserData = { email: email, first_name: firstName, last_name: lastName, home_location: homeLocation };
+    let searchArray = [];
+    for (let property in allUserData) {
       let updateQuery = `
-        UPDATE users
-        SET password = $2
-        WHERE username = $1
-      `;
-      await db.query(updateQuery, params).then(() => {
-        console.log("Password has been updated.");
-      });
+         UPDATE users
+         SET ${property} = $1
+         WHERE userid = $2
+      `
+      let params = [allUserData[property], req.params.id]
+      searchArray.push(db.query(updateQuery, params))
     }
-
-    const newUser = res.locals.getUser;
-
-    if (email) {
-      const params = [username, email];
-      let updateQuery = `
-        UPDATE users
-        SET email = $2
-        WHERE username = $1
-      `;
-      await db.query(updateQuery, params).then(() => {
-        console.log("Email has been updated.");
-        newUser.email = email;
-        req.session.user = newUser;
-      });
-    }
-    if (newUsername) {
-      const params = [username, newUsername];
-      let updateQuery = `
-        UPDATE users
-        SET username = $2
-        WHERE username = $1
-      `;
-      await db.query(updateQuery, params).then(() => {
-        console.log("Username has been updated.");
-        newUser.username = newUsername;
-        req.session.user = newUser;
-      });
-    }
+    await Promise.all(searchArray);
+    const params = [req.params.id];
+    const sqlQuery = `
+          SELECT userid, username, email, home_location, first_name, last_name FROM users 
+          WHERE userid = $1
+          `;
+    const data = await db.query(sqlQuery, params);
+    res.locals.getUser = data.rows[0] ? data.rows[0] : null;
     return next();
-  } catch (err) {
+  }
+  catch (err) {
     return next({
       log: `Error in userController.updateUser : ${err}`,
       message: { err: "Error occurred in userController.updateUser" },
@@ -188,9 +133,6 @@ userController.deleteUser = async (req, res, next) => {
       });
     }
 
-    console.log(deletedUser);
-
-    console.log("deleted user:  ", username);
     return next();
   } catch (err) {
     return next({

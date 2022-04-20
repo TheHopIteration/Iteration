@@ -2,7 +2,6 @@ require("dotenv").config();
 
 // node modules
 const express = require("express");
-const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");

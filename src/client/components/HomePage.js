@@ -7,9 +7,10 @@ import { useLocation } from "react-router-dom";
 import { SearchBox } from './homepage/SearchBox';
 import { EventsContainer } from './homepage/EventsContainer'
 
-const placeLib = ['places'];
 
-export const HomePage = ({ user, setUser, setLoggingOut }) => {
+
+const placeLib = ['places'];
+export const HomePage = ({ user }) => {
   const [apiEvents, setApiEvents] = useState([]);
   const [mapBase, setMapBase] = useState({});
   const [circleRadius, setCircleRadius] = useState(0);
@@ -26,9 +27,9 @@ export const HomePage = ({ user, setUser, setLoggingOut }) => {
   })
 
 
+  // re-render page when the apiEvents object
   useEffect(() => {
-    // re-render page when the apiEvents object or when user logs in or out changes.
-  }, [apiEvents.length, JSON.stringify(user), location])
+  }, [apiEvents.length, location])
 
   if (!isLoaded) return <div>Waiting for Google API to load ...</div>;
 

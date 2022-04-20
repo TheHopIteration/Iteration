@@ -1,21 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
+import { CheckBox } from '@mui/icons-material';
+import { Switch } from '@mui/material';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
-export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents, index }) => {
+export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents, index, timeConverter, setEventRoute, eventRoute }) => {
     // const options = { }
-    // converts date string into a local date time format, removes the last 21 characters
-    const timeConverter = (datetime) => {
-        const date = new Date(datetime);
-        return date.toLocaleString("en-US", { timeZone: "America/Los_Angeles", timeZoneName: "short" })
-            ;
-    }
-    const startTime = timeConverter(event.start_time);
+    // converts date string into a local date time format, removes the last 21 character
+    const [toggle, setToggle] = useState(false);
     const link = `https://www.google.com/search?q=${event.title}+${event.address}`;
     // console.log(event.start_time);
     // console.log(startTime);
     // console.log(user);
     // console.log("event.id" - event.id);
+
+    const handleSwitchChange = () => {
+        setToggle(!toggle);
+    };
+
+    useEffect(() => {
+        if (toggle) {
+            //add event to routelist
+            setEventRoute([...eventRoute, event]);
+        };
+        if (eventRoute.length !== 0 && !toggle) {
+            for (let i = 0; i < eventRoute.length; i++) {
+                if (eventRoute[i].user_event_id === event.user_event_id) {
+                    eventRoute.splice(i, 1);
+                    setEventRoute([...eventRoute]);
+                }
+            }
+        };
+    }, [toggle]);
 
     const deleteEvent = () => {
         fetch('http://localhost:3000/api/events', {
@@ -38,16 +54,27 @@ export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents,
     }
     return (
         <div className="flex justify-center mb-4">
-            <div className="block px-6 py-4 rounded-lg shadow-lg w-1/2 bg-white">
+            <div className="block px-6 py-4 rounded-lg shadow-lg w-1/2 bg-white min-w-full">
                 <h5 className="text-gray-600 text-xl leading-tight font-semibold">{index + 1}. {event.title}</h5>
-                <p className="text-gray-600 text-base ">{startTime}</p>
+                <p className="text-gray-600 text-base ">{event.start_time}</p>
                 <p>{event.address}</p>
                 <p className="text-gray-500">category: {event.category}</p>
                 <p className="text-gray-500">tags: {event.labels}</p>
                 <div className="flex space-x-2 justify-center">
+                    <Switch
+                        onChange={() => handleSwitchChange()}
+                    />
                     <a href={link} target="new">
-                        <SearchIcon className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-green-400 hover:bg-green-300" style={{ color: "blue", fontSize: 40 }} /></a>
-                    <DeleteRoundedIcon className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-red-500 hover:bg-red-400" onClick={() => deleteEvent()} style={{ color: "blue", fontSize: 40 }} />
+                        <SearchIcon
+                            className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-green-400 hover:bg-green-300"
+                            style={{ color: "blue", fontSize: 40 }}
+                        />
+                    </a>
+                    <DeleteRoundedIcon
+                        className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-red-500 hover:bg-red-400"
+                        onClick={() => deleteEvent()}
+                        style={{ color: "blue", fontSize: 40 }}
+                    />
                 </div>
             </div>
         </div>
