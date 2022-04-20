@@ -33,7 +33,7 @@ router.post(
 
 // update existing user
 // username is required in the fetch url
-router.put('/:id', userController.getUser, userController.updateUser, (req,res,next)=>{
+router.put('/:id', userController.getUser, userController.updateUser,  (req,res,next)=>{
     return res.status(200).json(res.locals.newUser);
 });
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Viewcomponent } from './profilepage/viewcomponent'
+import { ProfileCard } from './profilepage/ProfileCard'
 import { Footer } from './Footer'
 import { Button, Stack } from '@mui/material'
 
@@ -51,7 +52,7 @@ const handleList = (e) => {
     <div className='flex-col justify-center'>
       <div className="flex font-serif bg-gray-100 shadow-lg">
         <div className="h-[86vh] w-2/5 overflow-y-auto">
-          <h1>PLACEHOLDER</h1>
+          <ProfileCard user={user}></ProfileCard>
         </div>
         <div className="h-[86vh] w-3/5 overflow-y-auto justify-center">
           <Stack direction="row" spacing={2} justifyContent="center"
