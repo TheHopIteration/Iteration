@@ -29,5 +29,28 @@ friendController.getFriends = async (req, res, next) => {
   };
 
 
+friendController.addFriend = async (req, res, next) => {
+  //add a new friend as friendB where current user will be friendA. If requested friend username does not exist, return failure
+
+  try {
+    const { userA, userB } = req.body;
+
+    const sqlQuery = `
+      INSERT INTO friends (friend_a, friend_b)
+      VALUES ($1, $2) ON CONFLICT DO NOTHING
+    `
+    const params = [userA, userB];
+    const data = await db.query(sqlQuery, params);
+    res.locals.newFriend = data.rows[0];
+    return next();
+
+  } catch (err) {
+    return next({
+      log: `Error in friendController.addFriend : ${err}`,
+      message: { err: "Error occured in friendController.addFriend" },
+    });
+  }
+};
+
 
 module.exports = friendController;

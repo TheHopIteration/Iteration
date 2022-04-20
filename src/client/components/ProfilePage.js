@@ -6,36 +6,57 @@ import { Button, Stack } from '@mui/material'
 
 export const ProfilePage = ({ user }) => {
   const [eventsUserId, setEventsUserId] = useState([user.userid]);
-  const [friends, setFriends] = useState([]) ;
+  const [friends, setFriends] = useState([]);
+  const [newFriend, setNewFriend] = useState('');
 
   console.log('User Object: ', user)
-// view status to handle what view we're in
-const [view, setView] = useState('list')
-// handle button clicks
-const handleCal = (e) => {
-  if (view === 'list')
-  setView('calendar')
-};
-
-const handleList = (e) => {
-  if (view === 'calendar')
-  setView('list')
-}
-
-const handleUserChange = (e) => {
-  setEventsUserId(e.target.value)
-};
-
-
-
+  // view status to handle what view we're in
+  const [view, setView] = useState('list')
+  // handle button clicks
+  const handleCal = (e) => {
+    if (view === 'list')
+    setView('calendar')
+  };
+  
+  const handleList = (e) => {
+    if (view === 'calendar')
+    setView('list')
+  }
+  
+  
+  
+  
+  
   let backendUrl = new URL("http://localhost:3000/api/events");
   if (JSON.stringify(user) !== JSON.stringify({})) {
     backendUrl.search = new URLSearchParams({ userid: user.userid }).toString();
   }
-
-  let backendFriendsUrl = new URL("http://localhost:3000/api/friends");
+  
+  let backendGetFriendsUrl = new URL("http://localhost:3000/api/friends");
   if (JSON.stringify(user) !== JSON.stringify({})) {
-    backendFriendsUrl.search = new URLSearchParams({ userid: eventsUserId }).toString();
+    backendGetFriendsUrl.search = new URLSearchParams({ userid: eventsUserId }).toString();
+  }
+  
+  let backendNewFriendUrl = new URL("http://localhost:3000/api/friends");
+  if (JSON.stringify(user) !== JSON.stringify({})) {
+    backendNewFriendUrl.search = new URLSearchParams({ userA: user.username, userB: newFriend }).toString();
+  }
+  
+  const handleAddFriend = (e) => {
+    if (!newFriend) alert('Please enter a Friend\'s username before adding Friend!')
+  
+    fetch(backendNewFriendUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json())
+      .then(data => {
+        setFriends([...friends, data]);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   useEffect(() => {
@@ -55,7 +76,7 @@ const handleUserChange = (e) => {
   }, [JSON.stringify(userEvents)])
 
 
-  fetch(backendFriendsUrl, {
+  fetch(backendGetFriendsUrl, {
     headers: {
       'Content-Type': 'application/json'
     }
@@ -80,18 +101,25 @@ const handleUserChange = (e) => {
           sx = {{
             pt: 2,
           }}>
+            <TextField onChange={setNewFriend} label='friend username' variant='outlined'/>
+            <Button
+              variant='outlined'
+              onClick={handleAddFriend}
+            >
+              Add Friend
+            </Button>
             <Button
               variant="outlined"
               onClick={handleList}
-              >
-                List View
-              </Button>
-              <Button
-                variant="outlined"
-                onClick={handleCal}
-                >
-                  Calendar View
-                </Button>
+            >
+              List View
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={handleCal}
+            >
+              Calendar View
+            </Button>
           </Stack>
           <Viewcomponent user={user} userEvents={userEvents} setUserEvents={setUserEvents} view={view}></Viewcomponent>
         </div>
