@@ -71,6 +71,7 @@ export const SavedEventsContainer = ({ user, userEvents, setUserEvents, view, ch
                 <Button
                     target="_blank"
                     href={link}
+                    variant="contained"
                 >
                     Routes
                 </Button>
