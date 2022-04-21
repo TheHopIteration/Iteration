@@ -39,7 +39,7 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
   }
 
   return (
-    <div className="bg-gradient-to-br from-cyan-500 to-blue-500 flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-screen g-6 bg-gray-50">
+    <div className="bg-gradient-to-br from-custom-yellow via-custom-orange via-custom-darkcoral via-custom-darkpink to-custom-purple flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-screen g-6 bg-gray-50">
       <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
         <form onSubmit={handleSubmit}>
           <div className="form-group mb-6">

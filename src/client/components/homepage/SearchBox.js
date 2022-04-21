@@ -91,7 +91,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
   // Search Box className="flex bg-slate-50 flex-col justify-center items-center w-full p-5 pl-2 pb-2"
 
   return (
-    <div id="SearchBox" className="flex w-full m-4 items-center justify-center">
+    <div id="SearchBox" className="flex w-full m-4 items-center justify-center ">
 
         <div className="text-md font-semibold text-gray-500 mr-1">Location:  </div>
 
