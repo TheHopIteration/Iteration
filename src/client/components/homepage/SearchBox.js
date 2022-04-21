@@ -109,7 +109,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
             console.log('returned autocompleted place is: ', place);
           }}/>
 
-      <div class="flex visible md:hidden"> 
+      <div className="flex visible md:hidden"> 
         <button 
             className="px-2 py-2 border-2 border-blue-400 text-blue-400 ml-1 font-semibold text-sm uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
             type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"

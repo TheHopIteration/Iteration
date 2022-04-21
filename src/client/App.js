@@ -56,7 +56,7 @@ function App() {
         <Route
           path="/editProfile"
           element={
-            <EditProfilePage
+            <EditProfilePage 
               user={user}
               setUser={setUser}
             />
