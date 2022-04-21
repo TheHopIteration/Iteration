@@ -81,11 +81,12 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
         }
         if (JSON.stringify(user) !== '{}') {
           //fetch distance from home 
+          console.log('if statement');
           event.distanceFromHome = calculateDistance(user.home_location, event.address);
         }
       })
-      console.log('returned data from predictHQ api is:', data.results);
 
+      console.log('returned data from predictHQ api is:', data.results);
       setApiEvents(data.results);
     })
     .catch((err) => {
@@ -105,6 +106,7 @@ const calculateDistance = (origin, destination) => {
   service.getDistanceMatrix(request)
   .then(res => res.json())
   .then(data => console.log(data))
+  return null;
 };
 
   // Search Box className="flex bg-slate-50 flex-col justify-center items-center w-full p-5 pl-2 pb-2"
