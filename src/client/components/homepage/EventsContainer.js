@@ -4,14 +4,14 @@ import { EventCard } from './EventCard';
 export const EventsContainer = ({ apiEvents, user }) => {
     const numEvents = apiEvents.length;
     return (
-        <div className="h-auto bg-neutral-50 relative">
+        <div className="h-auto bg-neutral-50">
             {apiEvents.length > 0 ?
                 <div className="border-b py-0.5 flex justify-around  bg-sky-100 ">
                     <p className='text-md font-medium text-gray-600'>No. of events found: <span className="font-semibold text-cyan-800">{numEvents}</span></p>
                 </div>
                 :
-                <div className="py-0.5 flex justify-around bg-sky-100">
-                    <p className='font-medium text-md text-gray-600 items-center justify-center'>Please enter a query above to see events</p>
+                <div className="py-0.5 flex justify-around bg-custom-yellow">
+                    <p className='font-medium text-md m-2 content-center text-black'>Search to find out what's hopping!</p>
                 </div>
             }
 
