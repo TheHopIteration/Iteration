@@ -2,7 +2,7 @@ import React from "react";
 import regeneratorRuntime from "regenerator-runtime";
 import AutoComplete from "react-google-autocomplete";
 
-export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCircleRadius }) => {
+export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCircleRadius, user }) => {
   let todayDate = new Date().toISOString().slice(0, 10);
   
   const onFind = async () => {

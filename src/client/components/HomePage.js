@@ -36,7 +36,7 @@ export const HomePage = ({ user }) => {
   return (
     <div> 
       <div> 
-      <SearchBox apiEvents={apiEvents} setApiEvents={setApiEvents} setMapBase={setMapBase} mapRef={mapRef} setCircleRadius={setCircleRadius} />
+      <SearchBox apiEvents={apiEvents} setApiEvents={setApiEvents} setMapBase={setMapBase} mapRef={mapRef} setCircleRadius={setCircleRadius} user={user} />
       </div>
 
       <div className = "flex flex-col md:flex-row">
