@@ -1,3 +1,4 @@
+const { RouterTwoTone } = require('@mui/icons-material');
 const express = require('express');
 
 const friendController = require('../controllers/friendController');
@@ -15,6 +16,12 @@ router.post('/',
     friendController.addFriend,
     (req, res, next) => {
         return res.status(200).json(res.locals.newFriend);
+    });
+
+router.delete('/',
+    friendController.removeFriend,
+    (req, res, next) => {
+        return res.status(200).json(res.locals.removedFriend);
     });
 
 

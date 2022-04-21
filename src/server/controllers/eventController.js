@@ -6,11 +6,22 @@ const eventController = {};
 eventController.getSavedEvents = async (req, res, next) => {
   try {
     // TODO change user id to be pulled from session instead from req.body
-    const userid = req.query.userid;
-    // const { userid } = req.body;
-    console.log('userid in getSavedEvents is ', userid)
+    const username = req.query.username;
+   
 
-    // get data from user_events table and join with events table
+    // first, translate provided username to userid
+    const sqlQuery_MapUsernameToUserid = `
+          SELECT userid
+          FROM users
+          WHERE username = $1
+    `
+    const params1 = [username];
+    const data1 = await db.query(sqlQuery_MapUsernameToUserid, params1);
+    const userid = data1.rows[0]['userid']
+
+
+
+    // get data from user_events table and join with events table, filtering on userid
     const sqlQuery = `
           SELECT *
           FROM user_events AS ue
@@ -19,10 +30,10 @@ eventController.getSavedEvents = async (req, res, next) => {
           ORDER BY start_time
           ;`;
 
-    const params = [userid];
-    const data = await db.query(sqlQuery, params);
+    const params2 = [userid];
+    const data2 = await db.query(sqlQuery, params2);
 
-    res.locals.savedEvents = data.rows;
+    res.locals.savedEvents = data2.rows;
 
     return next();
   } catch (err) {

@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 
 
 export const SavedEventsContainer = ({ user, userEvents, setUserEvents }) => {
-    console.log('Rendering events container')
+    // console.log('Rendering events container')
     return (
         <div className="flex w-full justify-center">
             <div className="p-6 rounded-lg mb-12 w-full bg-gray-100 justify-center items-center text-center">

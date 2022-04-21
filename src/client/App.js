@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from "./components/HomePage";
 import { LoginPage } from "./components/LoginPage";
 import { SignupPage } from "./components/SignupPage";
-import { ProfilePage } from "./components/ProfilePage";
+import { ProfilePage } from "./components/ProfilePage.jsx";
 import { EditProfilePage } from "./components/EditProfilePage"
 import { Header } from "./components/Header";
 
