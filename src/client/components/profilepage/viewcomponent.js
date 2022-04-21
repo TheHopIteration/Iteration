@@ -25,12 +25,12 @@ export const Viewcomponent = ({ user, userEvents, setUserEvents, view }) => {
 
     if (view === 'list'){
         return (
-            <SavedEventsContainer user={user} userEvents={convertedEvents} setUserEvents={setUserEvents}></SavedEventsContainer>
+            <SavedEventsContainer user={user} userEvents={convertedEvents} setUserEvents={setUserEvents} view={view} chosenDate={''}></SavedEventsContainer>
         )
     }
     else {
         return(
-            <ScheduleCard user={user} userEvents={convertedEvents} setUserEvents={setUserEvents} />
+            <ScheduleCard user={user} userEvents={convertedEvents} setUserEvents={setUserEvents} view={view} />
         )
     }
 }
