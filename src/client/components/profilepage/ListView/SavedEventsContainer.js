@@ -11,10 +11,15 @@ export const SavedEventsContainer = ({ user, userEvents, setUserEvents, view, ch
     const [eventRoute, setEventRoute] = useState([]);
     const [link, setLink] = useState('');
     const [headerText, setText] = useState('');
-
+    const [routeButton, setButton] = useState(true)
 
     useEffect(() => {
         console.log(eventRoute);
+        if (eventRoute.length === 0 || !user.home_location){
+            setButton(true)
+        } else {
+            setButton(false)
+        }
         let waypoints = '';
         if (eventRoute.length === 1) {
             setLink(`https://www.google.com/maps/dir/?api=1&origin=${user.home_location.replace(/ /g, "+")}&destination=${eventRoute[0].latitude},${eventRoute[0].longitude}&travelmode=driving`);
@@ -35,7 +40,7 @@ export const SavedEventsContainer = ({ user, userEvents, setUserEvents, view, ch
     }, [eventRoute]);
 
     useEffect(() => {
-        console.log('Your chosen date is: ', chosenDate)
+        // console.log('Your chosen date is: ', chosenDate)
         if (view === 'list'){
             setText('All Saved Events')
         }
@@ -45,13 +50,15 @@ export const SavedEventsContainer = ({ user, userEvents, setUserEvents, view, ch
     }, [view, chosenDate])
 
 
+
+
     return (
         <div className="flex w-full justify-center">
-            <div className="p-6 rounded-lg mb-12 w-full bg-gray-100 justify-center items-center text-center">
+            <div className="p-6 rounded-lg mb-12 w-full justify-center items-center text-center">
                 {JSON.stringify(userEvents) !== JSON.stringify({}) ?
-                    <h2 className="text-gray-700 mt-3 text-2xl leading-tight font-bold mb-4 flex-center">{headerText}</h2>
+                    <h2 className="text-white  text-2xl leading-tight font-bold mb-4 flex-center">{headerText}</h2>
                     :
-                    <h4 className="text-gray-700 mt-3 text-xl leading-tight font-medium mb-4 flex-center">Please log in to see events</h4>
+                    <h4 className="text-white  text-xl leading-tight font-medium mb-4 flex-center">Please log in to see events</h4>
                 }
                 {JSON.stringify(userEvents) !== JSON.stringify({}) ? userEvents.map((event, index) => (
                     <SavedEventCard
@@ -72,6 +79,7 @@ export const SavedEventsContainer = ({ user, userEvents, setUserEvents, view, ch
                     target="_blank"
                     href={link}
                     variant="contained"
+                    disabled={routeButton}
                 >
                     Routes
                 </Button>
