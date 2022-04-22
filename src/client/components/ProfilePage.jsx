@@ -3,7 +3,7 @@ import { Viewcomponent } from './profilepage/viewcomponent';
 import { Friends } from './profilepage/Friends.jsx';
 import { Footer } from './Footer';
 import { ProfileCard } from './profilepage/ProfileCard';
-import { TextField, Button, Stack, InputLabel, Select, MenuItem, ThemeProvider, Container, Paper } from '@mui/material';
+import { TextField, Button, Stack, InputLabel, Select, MenuItem, ThemeProvider, Container, Paper, Autocomplete } from '@mui/material';
 
 import MuiTheme from "./MuiTheme"
 
@@ -12,7 +12,8 @@ export const ProfilePage = ({ user }) => {
   const [eventsUsername, setEventsUsername] = useState([user.username]);
   const [friends, setFriends] = useState([]);
   const [newFriend, setNewFriend] = useState('');
-  const [view, setView] = useState('list')
+  const [view, setView] = useState('list');
+  const [allUsernames, setAllUsernames] = useState('');
 
 
   // handle button clicks
@@ -131,12 +132,22 @@ export const ProfilePage = ({ user }) => {
   }, [eventsUsername]);
 
   //load all usernames once upon loading
-  // const allUsernames = fetch("/api/users/all"), {
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   }
-    
-  // }
+  useEffect(() => {
+      fetch("/api/users/all", {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => response.json())
+        .then(data => {
+          let usernames = [];
+          data.forEach((user) => {
+            usernames.push(user.username);
+          })
+          console.log(`DATA: ${JSON.stringify(data)}`)
+          setAllUsernames(usernames)
+        })
+  }, []);
+  
 
 
 
@@ -155,7 +166,14 @@ export const ProfilePage = ({ user }) => {
             >
           
           <Stack direction="row" spacing={2}>
-          <TextField value={newFriend} onChange={(e) => setNewFriend(e.target.value)} label='friend username' variant='outlined'/>
+          <Autocomplete
+          disablePortal
+          options={allUsernames}
+          renderInput={(params) => <TextField {...params} sx={{width:210}} label="Search Users" variant="outlined"/> }
+          value={newFriend}
+          onChange={(e, newVal) => {setNewFriend(newVal)}}
+          />
+          {/* // <TextField value={newFriend} onChange={(e) => setNewFriend(e.target.value)} label='friend username' variant='outlined'/> */}
           <Button
             variant='contained'
             onClick={handleAddFriend}
