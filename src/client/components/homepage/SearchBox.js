@@ -79,15 +79,27 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
           event.location[0] += Math.pow(10, -4) * (Math.random() * (1 - (-1)) - 1)
           event.location[1] += Math.pow(10, -4) * (Math.random() * (1 - (-1)) - 1)
         }
-        if (JSON.stringify(user) !== '{}' && distanceDuration.checked) {
-          //fetch distance from home 
-          timeAndDistance = await calculateDistance(user.home_location, event.entities[0].formatted_address, event.location);
-          event.distance = timeAndDistance.rows[0].elements[0].distance.text;
-          event.duration = timeAndDistance.rows[0].elements[0].duration.text;
-        }
       }
-      console.log('returned data from predictHQ api is:', events.results);
-      setApiEvents(events.results);
+      if (JSON.stringify(user) !== '{}' && distanceDuration.checked) {
+        //   //fetch distance from home 
+        //   timeAndDistance = await calculateDistance(user.home_location, event.entities[0].formatted_address, event.location);
+        //   event.distance = timeAndDistance.rows[0].elements[0].distance.text;
+        //   event.duration = timeAndDistance.rows[0].elements[0].duration.text;
+        Promise.all(events.results.map(event => calculateDistance(user.home_location, event.entities[0].formatted_address, event.location)))
+          .then(result => {
+            for (let i = 0; i < result.length; i++) {
+              console.log(events.results[i]);
+              events.results[i].distance = result[i].rows[0].elements[0].distance.text;
+              events.results[i].duration = result[i].rows[0].elements[0].duration.text;
+            }
+            console.log('returned data from predictHQ api is:', events.results);
+            setApiEvents(events.results);
+          })
+      }
+      else {
+        console.log('returned data from predictHQ api is:', events.results);
+        setApiEvents(events.results);
+      }
     } catch (error) {
       console.log(error);
     }
