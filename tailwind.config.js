@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: [
     "./src/**/*.{html,js}",
@@ -5,6 +7,13 @@ module.exports = {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
+    colors: {
+      'custom-purple': '#6a0d83',
+      'custom-darkpink': '#ce4993',
+      'custom-darkcoral': '#ee5d6c',
+      'custom-orange':'#fb9062',
+      'custom-yellow': '#eeaf61',
+    },
     extend: {},
   },
   plugins: [require("tw-elements/dist/plugin"), require('flowbite/plugin')],
