@@ -76,7 +76,7 @@ export const LoginPage = ({ user, sessionCheck }) => {
                             <div className="text-center lg:text-left">
                                 <button
                                     type="button"
-                                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                    className="inline-block px-7 py-3 bg-custom-darkcoral text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg focus:outline-none focus:ring-0 active:bg-darkcoral active:shadow-lg transition duration-150 ease-in-out"
                                     onClick={() => verifyUser()}
                                 >
                                     Login
@@ -85,12 +85,12 @@ export const LoginPage = ({ user, sessionCheck }) => {
                                     Don't have an account?
                                     <button
                                         onClick={() => navigate('/signup')}
-                                        className="ml-2 text-red-600 hover:text-red-600 focus:text-red-900 transition duration-200 ease-in-out"
+                                        className="ml-2 text-custom-darkcoral hover:text-custom-darkcoral focus:text-custom-darkcoral transition duration-200 ease-in-out"
                                     > Register
                                     </button>
                                 </p>
                                 <p>
-                                <button className="text-md font-semibold mt-2 pt-1 mb-0 text-green-600 hover:text-green-800 focus:text-green-800 transition duration-200 ease-in-out"
+                                <button className="text-md font-semibold mt-2 pt-1 mb-0 text-custom-darkcoral hover:text-custom-darkcoral focus:text-green-800 transition duration-200 ease-in-out"
                                     onClick={() => navigate('/')}>
                                     Return to app
                                 </button>
