@@ -72,42 +72,21 @@ export const EventCard = ({ event, cardId, user, num }) => {
                 <div className="p-4">
                     <h5 className="text-custom-purple text-xl font-semibold mb-2">{num}. {event.title}</h5>
                     <div className='w-full flex justify-between'>
-                        <p className="text-gray-700 text-md">
-                            Category
-                        </p>
-                        <p className="text-gray-700">{event.category}</p>
-                    </div>
-                    <div className='w-full flex justify-between'>
-                        <p className="text-gray-700 text-md">
-                            Labels
-                        </p>
-                        <p className="text-gray-700">{event.labels.slice(0, 2).join(', ')}</p>
-                    </div>
-                    {event.phq_attendance > 0 ?
-                        <div className='w-full flex justify-between'>
-                            <p className="text-gray-700 text-md">
-                                Predicted Attendance
-                            </p>
-                            <p className="text-gray-700">{event.phq_attendance}</p>
-                        </div> :
-                        <></>
-                    }
-                    <div className='w-full flex justify-between'>
-                        <p className="text-gray-700 text-md">
-                            Start Time
+                        <p className="text-gray-700 text-md font-semibold">
+                            Start Time:
                         </p>
                         <p className="text-gray-700">{startTime}</p>
                     </div>
                     <div className='w-full flex justify-between'>
-                        <p className="text-gray-700 text-md">
-                            End Time
+                        <p className="text-gray-700 text-md font-semibold">
+                            End Time:
                         </p>
                         <p className="text-gray-700">{endTime}</p>
                     </div>
                     {event.entities[0] ?
                         <div className='w-full flex justify-between'>
-                            <p className="text-gray-700 text-md">
-                                Venue
+                            <p className="text-gray-700 text-md font-semibold">
+                                Venue:
                             </p>
                             <div className="flex">
                                 <div className='px-4'></div>
@@ -119,12 +98,12 @@ export const EventCard = ({ event, cardId, user, num }) => {
                     }
                     {event.entities[0] ?
                         <div className='w-full flex justify-between'>
-                            <p className="text-gray-700 text-md">
-                                Address
+                            <p className="text-gray-700 text-md font-semibold">
+                                Address:
                             </p>
                             <div className="flex">
                                 <div className='px-2.5'></div>
-                                <p className="text-gray-700 text-sm text-end">{event.entities[0].formatted_address.slice(0, -30)}</p>
+                                <p className="text-gray-700 text-md text-end">{event.entities[0].formatted_address.slice(0, -30)}</p>
                             </div>
                         </div>
                         :
@@ -132,8 +111,8 @@ export const EventCard = ({ event, cardId, user, num }) => {
                     }
                     {event.duration ?
                         <div className='w-full flex justify-between'>
-                            <p className="text-gray-700 text-md">
-                                Duration
+                            <p className="text-gray-700 text-md font-semibold">
+                                Duration:
                             </p>
                             <div className="flex">
                                 <div className='px-2.5'></div>
@@ -145,8 +124,8 @@ export const EventCard = ({ event, cardId, user, num }) => {
                     }
                     {event.distance ?
                         <div className='w-full flex justify-between'>
-                            <p className="text-gray-700 text-md">
-                                Distance
+                            <p className="text-gray-700 text-md font-semibold">
+                                Distance:
                             </p>
                             <div className="flex">
                                 <div className='px-2.5'></div>
@@ -187,7 +166,7 @@ export const EventCard = ({ event, cardId, user, num }) => {
                         </div>
                     </div>
                     <div id={`hiddenError${cardId}`} className="hidden text-center">
-                        <p className='text-red-600 text-center font-semibold text-sm mt-2'>Event has been saved already for user {user.username}</p>
+                        <p className='text-custom-darkcoral text-center font-semibold text-sm mt-2'>Event has been saved already for user {user.username}</p>
                     </div>
                 </div>
             </div>

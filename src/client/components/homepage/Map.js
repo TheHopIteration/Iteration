@@ -113,12 +113,10 @@ export const Map = ({ apiEvents, mapBase, mapRef, circleRadius }) => {
                                                 }}
                                             >
                 
-                                                <div className="text-center p-2 bg-gray-50 border-2 border-emerald-400 first-letter: shadow-md flex-col font-gray-500">
+                                                <div className="text-center p-2 bg-gray-50 border-2 border-custom-darkcoral first-letter: shadow-md flex-col font-gray-500">
                                                     <h3 className='font-semibold text-base'>{event.title}</h3>
-                                                    <h5 className='text-sm'>Category: {event.category}</h5>
                                                     <h5 className='text-sm'>{timeConverter(event.start)}</h5>
-                                                    {event.phq_attendance > 0 && <p className='text-sm'>Attendance : {event.phq_attendance}</p>}
-                                                    <a href={`https://www.google.com/search?q=${event.title}+${timeConverter(event.start)}`} target='new' className='text-sm text-blue-400 underline cursor-pointer hover:text-blue-600'>Search on Google</a>
+                                                    <a href={`https://www.google.com/search?q=${event.title}+${timeConverter(event.start)}`} target='new' className='text-sm text-custom-darkcoral underline cursor-pointer hover:text-custom-darkcoral'>Search on Google</a>
                                                 </div>
                                             </InfoWindow>
                                         ) : <></>}

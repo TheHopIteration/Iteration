@@ -85,12 +85,12 @@ export const LoginPage = ({ user, sessionCheck }) => {
                                     Don't have an account?
                                     <button
                                         onClick={() => navigate('/signup')}
-                                        className="ml-2 text-red-600 hover:text-red-600 focus:text-red-900 transition duration-200 ease-in-out"
+                                        className="ml-2 text-custom-darkcoral hover:text-custom-darkcoral focus:text-custom-darkcoral transition duration-200 ease-in-out"
                                     > Register
                                     </button>
                                 </p>
                                 <p>
-                                <button className="text-md font-semibold mt-2 pt-1 mb-0 text-green-600 hover:text-green-800 focus:text-green-800 transition duration-200 ease-in-out"
+                                <button className="text-md font-semibold mt-2 pt-1 mb-0 text-custom-darkcoral hover:text-custom-darkcoral focus:text-green-800 transition duration-200 ease-in-out"
                                     onClick={() => navigate('/')}>
                                     Return to app
                                 </button>

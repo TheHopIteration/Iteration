@@ -159,7 +159,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
 
       <div className="flex visible md:hidden"> 
         <button 
-            className="px-2 py-2 border-2 border-custom-darkcoral text-custom-darkcoral ml-1 font-semibold text-sm uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            className="px-2 py-2 border-2 border-custom-darkcoral text-custom-darkcoral ml-1 font-semibold text-sm uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
             type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 fill-custom-darkcoral" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -172,7 +172,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
             onClick={() => {
               onFind();
             }}
-            className="px-2 py-2 border-2 border-custom-darkcoral text-white bg-custom-darkcoral ml-1 text-sm font-semibold uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            className="px-2 py-2 border-2 border-custom-darkcoral text-white bg-custom-darkcoral ml-1 text-sm font-semibold uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
             type="button"  data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -183,7 +183,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
 
         <div className="invisible md:visible" > 
           <button 
-            className="px-4 py-2 border-2 border-custom-darkcoral text-custom-darkcoral ml-4 font-semibold text-sm uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            className="px-4 py-2 border-2 border-custom-darkcoral text-custom-darkcoral ml-4 font-semibold text-sm uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
             type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
           >
             Filter Events
@@ -193,7 +193,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
             onClick={() => {
               onFind();
             }}
-            className="px-4 py-2 border-2 border-custom-darkcoral text-white bg-custom-darkcoral ml-4 mr-4 text-sm font-semibold uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            className="px-4 py-2 border-2 border-custom-darkcoral text-white bg-custom-darkcoral ml-4 mr-4 text-sm font-semibold uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
             type="button" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
           >
             Search Events
@@ -217,19 +217,13 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
 
         <button 
           type="button" 
-          className="btn-close box-content w-4 h-4 p-2 -my-5 -mr-2 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" 
+          className="btn-close box-content w-4 h-4 p-2 -my-5 -mr-2 text-black border-none rounded-none opacity-50 hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg" 
           data-bs-dismiss="offcanvas" 
           aria-label="Close">
         </button>
       </div>
 
       <div className="invisible md:visible" >
-        <button
-          className="px-4 py-2 border-2 border-blue-400 text-blue-400 ml-4 font-semibold text-sm uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-          type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
-        >
-          Filter Events
-        </button>
 
         <div className="flex mt-2 justify-center"> 
           <div>
@@ -288,7 +282,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
 
                <div className="form-check">
                  <input
-                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-2 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   type="checkbox"
                   value="concerts"
                   id="flexCheckConcerts"
@@ -304,7 +298,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
 
               <div className="form-check">
                 <input
-                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral  focus:outline-none transition duration-200 mt-2 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   type="checkbox"
                   value="conferences"
                   id="flexCheckConferences"
@@ -320,7 +314,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
 
               <div className="form-check">
                 <input
-                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-2 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   type="checkbox"
                   value="expos"
                   id="flexCheckExpos"
@@ -336,7 +330,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
 
               <div className="form-check">
                 <input
-                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-2 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   type="checkbox"
                   value="festivals"
                   id="flexCheckFestivals"
@@ -352,7 +346,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
 
               <div className="form-check">
                 <input
-                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral  focus:outline-none transition duration-200 mt-2 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   type="checkbox"
                   value="performing-arts"
                   id="flexCheckPerformingArts"
@@ -368,7 +362,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
 
               <div className="form-check">
                 <input
-                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-2 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   type="checkbox"
                   value="sports"
                   id="flexCheckSports"
@@ -386,7 +380,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
 
               <div className="form-check">
                 <input
-                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-green-600 checked:border-green-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   type="checkbox"
                   value="distanceDuration"
                   id="distanceDuration"
@@ -400,7 +394,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
                 </label>
               </div>
 
-              <button type="button" className="inline-block px-6 py-2 mt-5 border-2 border-green-500 text-green-400 font-semibold text-sm leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" data-bs-dismiss="offcanvas">
+              <button type="button" className="mt-8 px-4 py-2 border-2 border-custom-darkcoral text-white bg-custom-darkcoral mr-4 text-sm font-semibold uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="offcanvas">
                 Close Options</button>
             </div>
 
@@ -425,7 +419,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
                 Error
               </h5>
               <button type="button"
-                className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg hover:no-underline"
                 data-bs-dismiss="modal" aria-label="Close">
               </button>
             </div>

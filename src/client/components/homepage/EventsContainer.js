@@ -11,7 +11,7 @@ export const EventsContainer = ({ apiEvents, user }) => {
                 </div>
                 :
                 <div className="py-0.5 flex justify-around bg-custom-yellow">
-                    <p className='font-medium text-md m-2 content-center text-black'>Search to find out what's hopping!</p>
+                    <p className='font-medium text-md m-2 content-center text-black'>Search to find out what's hoppening!</p>
                 </div>
             }
 
