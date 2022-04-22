@@ -26,6 +26,8 @@ export const EventCard = ({ event, cardId, user, num }) => {
     const local_rank = event.local_rank ? event.local_rank : null;
     const rank = event.rank ? event.rank : null;
     const address = event.entities[0].formatted_address ? event.entities[0].formatted_address.slice(0, -30) : null;
+    const distance = event.distance ? event.distance : null;
+    const duration = event.duration ? event.duration : null;
 
     const saveEvent = () => {
         fetch('http://localhost:3000/api/events', {
@@ -128,7 +130,32 @@ export const EventCard = ({ event, cardId, user, num }) => {
                         :
                         <></>
                     }
-
+                    {event.duration ?
+                        <div className='w-full flex justify-between'>
+                            <p className="text-gray-700 text-md">
+                                Duration
+                            </p>
+                            <div className="flex">
+                                <div className='px-2.5'></div>
+                                <p className="text-gray-700 text-sm text-end">{event.duration}</p>
+                            </div>
+                        </div>
+                        :
+                        <></>
+                    }
+                    {event.distance ?
+                        <div className='w-full flex justify-between'>
+                            <p className="text-gray-700 text-md">
+                                Distance
+                            </p>
+                            <div className="flex">
+                                <div className='px-2.5'></div>
+                                <p className="text-gray-700 text-sm text-end">{event.distance}</p>
+                            </div>
+                        </div>
+                        :
+                        <></>
+                    }
                     <div className='flex justify-between mx-4'>
                         {event.description ?
                             <button
