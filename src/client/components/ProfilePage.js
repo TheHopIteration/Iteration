@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Viewcomponent } from './profilepage/viewcomponent'
 import { ProfileCard } from './profilepage/ProfileCard'
 import { Footer } from './Footer'
-import { Button, Stack } from '@mui/material'
+import { Button, Stack, ThemeProvider } from '@mui/material'
 
+import MuiTheme from "./MuiTheme"
 
 export const ProfilePage = ({ user }) => {
   const [userEvents, setUserEvents] = useState([]);
@@ -49,8 +50,10 @@ const handleList = (e) => {
 
 
   return (
-    <div className='flex-col justify-center '>
-      <div className="flex font-serif bg-gradient-to-br from-custom-yellow via-custom-orange via-custom-darkcoral via-custom-darkpink to-custom-purple shadow-lg">
+    <ThemeProvider theme={MuiTheme}>
+    <div className='flex-col justify-center'>
+      <div className="flex font-serif bg-gradient-to-br from-custom-yellow via-custom-orange via-custom-darkcoral via-custom-darkpink to-custom-purple
+ shadow-lg">
         <div className="h-[86vh] w-2/5 overflow-y-auto">
           <ProfileCard user={user}></ProfileCard>
         </div>
@@ -77,5 +80,6 @@ const handleList = (e) => {
       </div>
       <Footer />
     </div>
+    </ThemeProvider>
   )
 }
