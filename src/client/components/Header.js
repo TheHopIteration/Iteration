@@ -52,7 +52,7 @@ export const Header = ({ user, setUser }) => {
   };
 
   return (
-    <nav className="bg-custom-purple h-20">
+    <nav className="bg-custom-purple h-20 relative">
       <div className="flex flex-wrap justify-between overflow-visible">
         <div className="overflow-visible static">
           <a className="pl-10 -mt-7 absolute">
@@ -73,7 +73,7 @@ export const Header = ({ user, setUser }) => {
           py-2.5
           mr-5
           mt-5
-          bg-yellow-500
+          bg-custom-yellow
           text-white
           font-medium
           text-xs
@@ -81,8 +81,7 @@ export const Header = ({ user, setUser }) => {
           uppercase
           rounded
           shadow-md
-          hover:bg-yellow-600 hover:shadow-lg
-          focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0
+          hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg
           active:bg-yellow-700 active:shadow-lg active:text-white
           transition
           duration-150
@@ -273,7 +272,7 @@ export const Header = ({ user, setUser }) => {
         ) : (
           <button
             type="button"
-            className="px-4 py-2 text-white bg-custom-yellow mt-2 mr-2 text-sm font-semibold uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
+            className="inline-block px-7 py-2.5 mt-5 mr-5 bg-custom-yellow text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg active:bg-yellow-700 active:shadow-lg transition duration-150 ease-in-out"
             onClick={navLogin}
           >
             Login
