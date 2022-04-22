@@ -151,10 +151,10 @@ export const EventCard = ({ event, cardId, user, num }) => {
                             onClick={() => window.open(`https://www.google.com/search?q=${event.title}+${startTime}`, '_blank').focus()}
                         />
                         {JSON.stringify(user) === JSON.stringify({}) ?
-                            <button type="button" className=" cursor-not-allowed opacity-50 mt-4 text-white inline-block ml-2 px-4 py-2 bg-custom-darkcoral font-medium font-semibold text-sm leading-tight uppercase rounded shadow-md">
+                            <button type="button" className=" cursor-not-allowed opacity-50 mt-4 text-white inline-block ml-2 px-4 py-2 bg-custom-darkcoral font-semibold text-sm leading-tight rounded shadow-md">
                                 Save Event</button>
                             :
-                            <button type="button" className=" mt-4 inline-block px-4 py-2 bg-custom-darkcoral text-white ml-2 font-medium font-semibold text-sm leading-tight uppercase rounded shadow-md hover:bg-darken hover:shadow-lg focus:bg-custom-darkcoral
+                            <button type="button" className=" mt-4 inline-block px-4 py-2 bg-custom-darkcoral text-white ml-2 font-medium font-semibold text-sm leading-tight rounded shadow-md hover:bg-darken hover:shadow-lg focus:bg-custom-darkcoral
                             focus:shadow-lg focus:outline-none focus:ring-0 active:bg-custom-darkcoral active:shadow-lg transition duration-150 ease-in-out"
                                 onClick={() => saveEvent()}>
                                 Save Event</button>
