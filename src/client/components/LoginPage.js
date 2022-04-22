@@ -45,11 +45,11 @@ export const LoginPage = ({ user, sessionCheck }) => {
 
     return (
         <section className="h-screen">
-            <div className="px-6 h-screen text-gray-800">
+
                 <div className="flex xl:justify-center lg:justify-between justify-center items-center
-                flex-wrap h-full g-6 bg-gray-50">
-                    <div className="xl:w-3/12 lg:w-4/12 md:w-5/12">
-                        <form className='bg-gradient-to-r from-sky-100 to-indigo-100 p-4 rounded-lg border-2 border-gray-200 shadow-lg'>
+                flex-wrap h-full g-6 bg-gradient-to-br from-custom-yellow via-custom-orange via-custom-darkcoral via-custom-darkpink to-custom-purple">
+                    <div className="xl:w-3/12 lg:w-4/12 md:w-5/12 bg-white rounded-lg">
+                        <form className='bg-white p-4 rounded-lg border-2 border-gray-200 shadow-lg'>
                             <div
                                 className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
                             >
@@ -76,7 +76,7 @@ export const LoginPage = ({ user, sessionCheck }) => {
                             <div className="text-center lg:text-left">
                                 <button
                                     type="button"
-                                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                    className="inline-block px-7 py-3 bg-custom-darkcoral text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg focus:outline-none focus:ring-0 active:bg-darkcoral active:shadow-lg transition duration-150 ease-in-out"
                                     onClick={() => verifyUser()}
                                 >
                                     Login
@@ -85,19 +85,21 @@ export const LoginPage = ({ user, sessionCheck }) => {
                                     Don't have an account?
                                     <button
                                         onClick={() => navigate('/signup')}
-                                        className="ml-2 text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                                        className="ml-2 text-red-600 hover:text-red-600 focus:text-red-900 transition duration-200 ease-in-out"
                                     > Register
                                     </button>
                                 </p>
-                                <button className="text-md font-semibold mt-2 pt-1 mb-0 text-emerald-600 hover:text-emerald-800 focus:text-emerald-800 transition duration-200 ease-in-out"
+                                <p>
+                                <button className="text-md font-semibold mt-2 pt-1 mb-0 text-green-600 hover:text-green-800 focus:text-green-800 transition duration-200 ease-in-out"
                                     onClick={() => navigate('/')}>
                                     Return to app
                                 </button>
+                                </p>
                             </div>
                         </form>
                     </div>
                 </div>
-            </div>
+
         </section>
     )
 }

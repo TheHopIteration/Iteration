@@ -36,11 +36,11 @@ export const SignupPage = () => {
 
     return (
         <section className="h-screen">
-            <div className="px-6 h-screen text-gray-800">
+
                 <div className="flex xl:justify-center lg:justify-between justify-center items-center
-            flex-wrap h-full g-6 bg-gray-50">
+            flex-wrap h-full g-6 bg-gradient-to-br from-custom-yellow via-custom-orange via-custom-darkcoral via-custom-darkpink to-custom-purple">
                     <div className="xl:w-3/12 lg:w-4/12 md:w-5/12">
-                        <form onSubmit={() => createUser()} className='bg-gradient-to-r from-orange-100 to-green-100  p-4 rounded-lg border-2 border-gray-200 shadow-lg'>
+                        <form onSubmit={() => createUser()} className='bg-white  p-4 rounded-lg border-2 border-gray-200 shadow-lg'>
                             <div
                                 className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
                             >
@@ -109,7 +109,7 @@ export const SignupPage = () => {
                             <div className="text-center lg:text-left">
                                 <button
                                     type="submit"
-                                    className="inline-block mb-4 px-7 py-3 bg-green-600 text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                    className="inline-block mb-4 px-7 py-3 bg-custom-darkcoral text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg focus:outline-none focus:ring-0 active:bg-darkcoral active:shadow-lg transition duration-150 ease-in-out"
                                 >
                                     Create Account
                                 </button>
@@ -123,7 +123,7 @@ export const SignupPage = () => {
                         </form>
                     </div>
                 </div>
-            </div>
+
         </section>
     )
 }
