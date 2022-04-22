@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react'
+import {List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import { Egg } from '@mui/icons-material'
 
 
 export const Friends = ({ friends }) => {
 
-  const friendEls = friends.map((friend, i) => {
+  const friendEls = friends.map((friend, index) => {
     return (
-      <div key={i}>{friend}</div>
+      <ListItem key={index}>
+        <ListItemIcon>
+          <Egg/>
+        </ListItemIcon>
+        <ListItemText primary={friend} />
+      </ListItem>
     )
   })
 
   return (
-    <div>  
+    <List>  
       {friendEls}
-    </div>
+    </List>
   )
 }
