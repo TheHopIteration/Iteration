@@ -56,7 +56,7 @@ export const SavedEventsContainer = ({ user, userEvents, setUserEvents, view, ch
         <div className="flex w-full justify-center">
             <div className="p-6 rounded-lg mb-12 w-full justify-center items-center text-center">
                 {JSON.stringify(userEvents) !== JSON.stringify({}) ?
-                    <h2 className="text-white  text-2xl leading-tight font-bold mb-4 flex-center">{headerText}</h2>
+                    <h2 className="text-black  text-2xl leading-tight font-bold mb-4 flex-center">{headerText}</h2>
                     :
                     <h4 className="text-white  text-xl leading-tight font-medium mb-4 flex-center">Please log in to see events</h4>
                 }

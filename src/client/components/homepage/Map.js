@@ -60,8 +60,8 @@ export const Map = ({ apiEvents, mapBase, mapRef, circleRadius }) => {
                             visible: true,
                             zIndex: 1,
                             fillOpacity: 0.05,
-                            strokeColor: "#FBC02D",
-                            fillColor: "#FBC02D"
+                            strokeColor: "#eeaf61",
+                            fillColor: "#eeaf61"
                         }}
                     />
                 )}

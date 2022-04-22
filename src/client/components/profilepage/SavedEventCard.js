@@ -64,14 +64,14 @@ export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents,
                     />
                     <a href={link} target="new">
                         <SearchIcon
-                            className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-green-400 hover:bg-green-300"
-                            style={{ color: "blue", fontSize: 40 }}
+                            className="mt-4 p-1.5 rounded-md shadow-sm text-white bg-custom-darkcoral hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg"
+                            style={{ color: "text-gray-300", fontSize: 40 }}
                         />
                     </a>
                     <DeleteRoundedIcon
-                        className="mt-4 p-1.5 rounded-md shadow-sm text-gray-300 bg-red-500 hover:bg-red-400"
+                        className="mt-4 p-1.5 rounded-md shadow-sm text-white bg-custom-yellow hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg"
                         onClick={() => deleteEvent()}
-                        style={{ color: "blue", fontSize: 40 }}
+                        style={{ color: "text-gray-300", fontSize: 40 }}
                     />
                 </div>
             </div>

@@ -90,7 +90,7 @@ export const LoginPage = ({ user, sessionCheck }) => {
                                     </button>
                                 </p>
                                 <p>
-                                <button className="text-md font-semibold mt-2 pt-1 mb-0 text-custom-darkcoral hover:text-custom-darkcoral focus:text-green-800 transition duration-200 ease-in-out"
+                                <button className="text-md font-semibold mt-2 pt-1 mb-0 text-custom-darkcoral hover:text-custom-darkcoral focus:text-custom-darkcoral transition duration-200 ease-in-out"
                                     onClick={() => navigate('/')}>
                                     Return to app
                                 </button>
