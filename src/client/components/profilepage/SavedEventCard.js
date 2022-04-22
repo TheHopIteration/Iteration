@@ -53,13 +53,11 @@ export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents,
             })
     }
     return (
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-4 w-full">
             <div className="block px-6 py-4 rounded-lg shadow-lg w-1/2 bg-white min-w-full">
                 <h5 className="text-gray-600 text-xl leading-tight font-semibold">{index + 1}. {event.title}</h5>
                 <p className="text-gray-600 text-base ">{event.start_time}</p>
                 <p>{event.address}</p>
-                <p className="text-gray-500">category: {event.category}</p>
-                <p className="text-gray-500">tags: {event.labels}</p>
                 <div className="flex space-x-2 justify-center">
                     <Switch
                         onChange={() => handleSwitchChange()}

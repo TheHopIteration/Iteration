@@ -15,7 +15,6 @@ export const Viewcomponent = ({ user, userEvents, setUserEvents, view }) => {
     }
 
     useEffect(() => {
-        console.log('converting userevents')
         for (let i = 0; i < userEvents.length; i++){
             userEvents[i].start_time=timeConverter(userEvents[i].start_time)
         }
