@@ -62,13 +62,13 @@ export const EventCard = ({ event, cardId, user, num }) => {
     }
 
     return (
-        <div className="flex justify-center items-center w-72">
+        <div className="justify-center items-center w-72">
             <div className="rounded-lg shadow-lg bg-white">
                 {/* <a href="#!">
                     <img className="rounded-t-lg" src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" alt="" />
                 </a> */}
                 <div className="p-4">
-                    <h5 className="text-gray-900 text-xl font-semibold mb-2">{num}. {event.title}</h5>
+                    <h5 className="text-custom-purple text-xl font-semibold mb-2">{num}. {event.title}</h5>
                     <div className='w-full flex justify-between'>
                         <p className="text-gray-700 text-md">
                             Category
@@ -132,24 +132,24 @@ export const EventCard = ({ event, cardId, user, num }) => {
                     <div className='flex justify-between mx-4'>
                         {event.description ?
                             <button
-                                className="px-4 py-2 mt-4 rounded-md text-gray-600 bg-gray-200 font-semibold text-sm flex align-center w-max
+                                className="px-4 py-2 mt-4 mr-2 rounded-md text-white bg-custom-yellow font-semibold text-sm flex align-center w-max
                                 cursor-pointer hover:bg-gray-400 hover:shadow-lg focus:bg-gray-400 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out
                                                 "data-bs-toggle="collapse" data-bs-target={`#descriptionCollapse${cardId}`} aria-expanded="false" aria-controls={`descriptionCollapse${cardId}`}>
                                 Extra Info
                             </button>
                             :
                             <div className="text-white mr-[92px]">.</div>}
-                        <SearchIcon className="mt-4 p-0.5 rounded-md shadow-sm text-gray-300 bg-gray-200 items
+                        <SearchIcon className="mt-4 p-0.5 rounded-md shadow-sm text-custom-darkcoral bg-gray-200 items
                         cursor-pointer hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-300 active:shadow-lg transition duration-150 ease-in-out"
-                            style={{ color: "green", fontSize: 35 }}
+                            style={{ color: "custom-darkcoral", fontSize: 35 }}
                             onClick={() => window.open(`https://www.google.com/search?q=${event.title}+${startTime}`, '_blank').focus()}
                         />
                         {JSON.stringify(user) === JSON.stringify({}) ?
-                            <button type="button" className=" cursor-not-allowed opacity-50 mt-4 text-white inline-block px-6 py-2.5 bg-emerald-600 font-medium text-xs leading-tight uppercase rounded shadow-md">
+                            <button type="button" className=" cursor-not-allowed opacity-50 mt-4 text-white inline-block ml-2 px-4 py-2 bg-custom-darkcoral font-medium font-semibold text-sm leading-tight uppercase rounded shadow-md">
                                 Save Event</button>
                             :
-                            <button type="button" className=" mt-4 inline-block px-6 py-2.5 bg-emerald-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-emerald-800 hover:shadow-lg focus:bg-emerald-800
-                            focus:shadow-lg focus:outline-none focus:ring-0 active:bg-emerald-800 active:shadow-lg transition duration-150 ease-in-out"
+                            <button type="button" className=" mt-4 inline-block px-4 py-2 bg-custom-darkcoral text-white ml-2 font-medium font-semibold text-sm leading-tight uppercase rounded shadow-md hover:bg-darken hover:shadow-lg focus:bg-custom-darkcoral
+                            focus:shadow-lg focus:outline-none focus:ring-0 active:bg-custom-darkcoral active:shadow-lg transition duration-150 ease-in-out"
                                 onClick={() => saveEvent()}>
                                 Save Event</button>
                         }
@@ -160,7 +160,7 @@ export const EventCard = ({ event, cardId, user, num }) => {
                         </div>
                     </div>
                     <div id={`hiddenError${cardId}`} className="hidden text-center">
-                        <p className='text-red-600 text-center text-sm mt-2'>Event has been saved already for user {user.username}</p>
+                        <p className='text-red-600 text-center font-semibold text-sm mt-2'>Event has been saved already for user {user.username}</p>
                     </div>
                 </div>
             </div>
