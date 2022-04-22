@@ -124,7 +124,7 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
           <button type="submit" onClick={handleSubmit} className="
       px-6
       py-2.5
-      bg-blue-600
+      bg-custom-darkcoral
       text-white
       font-medium
       text-xs
@@ -132,9 +132,9 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
       uppercase
       rounded
       shadow-md
-      hover:bg-blue-700 hover:shadow-lg
-      focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-      active:bg-blue-800 active:shadow-lg
+      hover:brightness-75 hover:shadow-lg
+      focus:bg-darkcoral focus:shadow-lg focus:outline-none focus:ring-0
+      active:bg-darkcoral active:shadow-lg
       transition
       duration-150
       ease-in-out">Submit</button>

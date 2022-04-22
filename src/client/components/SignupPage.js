@@ -109,7 +109,7 @@ export const SignupPage = () => {
                             <div className="text-center lg:text-left">
                                 <button
                                     type="submit"
-                                    className="inline-block mb-4 px-7 py-3 bg-green-600 text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                                    className="inline-block mb-4 px-7 py-3 bg-custom-darkcoral text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg focus:outline-none focus:ring-0 active:bg-darkcoral active:shadow-lg transition duration-150 ease-in-out"
                                 >
                                     Create Account
                                 </button>
