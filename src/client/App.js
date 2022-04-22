@@ -6,13 +6,18 @@ import { SignupPage } from "./components/SignupPage";
 import { ProfilePage } from "./components/ProfilePage.jsx";
 import { EditProfilePage } from "./components/EditProfilePage"
 import { Header } from "./components/Header";
+import { Snackbar } from '@mui/material';
+import Slide from '@mui/material/Slide';
 
 const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState({});
-
+  const [submitNotification, setSubmitNotification] = useState(false);
   
+  const handleClose = () => {
+    setSubmitNotification(false);
+  };
 
   const sessionCheck = async () => {
     const response = await fetch("http://localhost:3000/auth", {
@@ -28,13 +33,13 @@ function App() {
 
   //run sessionCheck once upon render to update user state if user already logged in. Persists sessions
   useEffect(() => {
-    
+
     sessionCheck();
   }, []);
 
   return (
     <BrowserRouter>
-    <Header user={user} setUser={setUser}/>
+      <Header user={user} setUser={setUser} />
       <Routes>
         <Route
           path="/"
@@ -44,7 +49,7 @@ function App() {
             />
           }
         ></Route>
-        <Route path="/login" element={<LoginPage user={user} sessionCheck={sessionCheck}/>}></Route>
+        <Route path="/login" element={<LoginPage user={user} sessionCheck={sessionCheck} />}></Route>
         <Route path="/signup" element={<SignupPage />}></Route>
         <Route
           path="/profile"
@@ -57,13 +62,24 @@ function App() {
         <Route
           path="/editProfile"
           element={
-            <EditProfilePage 
+            <EditProfilePage
               user={user}
               setUser={setUser}
+              setSubmitNotification={setSubmitNotification}
             />
           }
         ></Route>
       </Routes>
+      <Snackbar
+        open={submitNotification}
+        autoHideDuration={4000}
+        onClose={handleClose}
+        message="Changes Saved!"
+        TransitionComponent={Slide}
+        sx={{
+          "& .MuiSnackbarContent-root": { backgroundColor: "#eeaf61" }
+        }}
+      />
     </BrowserRouter>
   );
 }

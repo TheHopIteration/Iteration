@@ -79,15 +79,27 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
           event.location[0] += Math.pow(10, -4) * (Math.random() * (1 - (-1)) - 1)
           event.location[1] += Math.pow(10, -4) * (Math.random() * (1 - (-1)) - 1)
         }
-        if (JSON.stringify(user) !== '{}' && distanceDuration.checked) {
-          //fetch distance from home 
-          timeAndDistance = await calculateDistance(user.home_location, event.entities[0].formatted_address, event.location);
-          event.distance = timeAndDistance.rows[0].elements[0].distance.text;
-          event.duration = timeAndDistance.rows[0].elements[0].duration.text;
-        }
       }
-      console.log('returned data from predictHQ api is:', events.results);
-      setApiEvents(events.results);
+      if (JSON.stringify(user) !== '{}' && distanceDuration.checked) {
+        //   //fetch distance from home 
+        //   timeAndDistance = await calculateDistance(user.home_location, event.entities[0].formatted_address, event.location);
+        //   event.distance = timeAndDistance.rows[0].elements[0].distance.text;
+        //   event.duration = timeAndDistance.rows[0].elements[0].duration.text;
+        Promise.all(events.results.map(event => calculateDistance(user.home_location, event.entities[0].formatted_address, event.location)))
+          .then(result => {
+            for (let i = 0; i < result.length; i++) {
+              console.log(events.results[i]);
+              events.results[i].distance = result[i].rows[0].elements[0].distance.text;
+              events.results[i].duration = result[i].rows[0].elements[0].duration.text;
+            }
+            console.log('returned data from predictHQ api is:', events.results);
+            setApiEvents(events.results);
+          })
+      }
+      else {
+        console.log('returned data from predictHQ api is:', events.results);
+        setApiEvents(events.results);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -148,21 +160,21 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
 
         // apiKey={process.env.GOOGLE_MAPS}
 
-          options={{
-            types: ["geocode"],
-            componentRestrictions: { country: "us" },
-          }}
-      
-          onPlaceSelected={(place) => {
-            console.log('returned autocompleted place is: ', place);
-          }}/>
+        options={{
+          types: ["geocode"],
+          componentRestrictions: { country: "us" },
+        }}
 
-      <div className="flex visible md:hidden"> 
-        <button 
-            className="px-2 py-2 border-2 border-blue-400 text-blue-400 ml-1 font-semibold text-sm uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-            type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        onPlaceSelected={(place) => {
+          console.log('returned autocompleted place is: ', place);
+        }} />
+
+      <div className="flex visible md:hidden">
+        <button
+          className="px-2 py-2 border-2 border-blue-400 text-blue-400 ml-1 font-semibold text-sm uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+          type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
           </svg>
 

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+
 // const db = require("../models/dataModels");
 
 
-export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
+export const EditProfilePage = ({ user, setUser, setSubmitNotification }) => {
   let navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
@@ -18,6 +19,7 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
   }
 
   const handleSubmit = (e) => {
+    
     e.preventDefault();
     fetch(`http://localhost:3000/api/users/${user.userid}`, {
       method: 'PUT',
@@ -29,6 +31,7 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        setSubmitNotification(true);
         setUser(data);
         navigate("/");
         // window.location.reload(false);
@@ -139,6 +142,8 @@ export const EditProfilePage = ({ user, setUser, setLoggingOut }) => {
       duration-150
       ease-in-out">Submit</button>
         </form>
-      </div></div>
+      </div>
+      
+    </div>
   )
 }
