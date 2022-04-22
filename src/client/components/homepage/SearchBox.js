@@ -109,12 +109,12 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
             console.log('returned autocompleted place is: ', place);
           }}/>
 
-      <div class="flex visible md:hidden"> 
+      <div className="flex visible md:hidden"> 
         <button 
             className="px-2 py-2 border-2 border-custom-darkcoral text-custom-darkcoral ml-1 font-semibold text-sm uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
             type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 fill-custom-darkcoral" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
 

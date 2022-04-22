@@ -139,7 +139,7 @@ export const EventCard = ({ event, cardId, user, num }) => {
                             </button>
                             :
                             <div className="text-white mr-[92px]">.</div>}
-                        <SearchIcon className="mt-4 p-0.5 rounded-md shadow-sm text-gray-300 bg-gray-200
+                        <SearchIcon className="mt-4 p-0.5 rounded-md shadow-sm text-gray-300 bg-gray-200 items
                         cursor-pointer hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-300 active:shadow-lg transition duration-150 ease-in-out"
                             style={{ color: "green", fontSize: 35 }}
                             onClick={() => window.open(`https://www.google.com/search?q=${event.title}+${startTime}`, '_blank').focus()}

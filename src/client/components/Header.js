@@ -52,7 +52,7 @@ export const Header = ({ user, setUser }) => {
   };
 
   return (
-    <nav class="bg-custom-purple h-20">
+    <nav className="bg-custom-purple h-20">
       <div className="flex flex-wrap justify-between overflow-visible">
         <div className="overflow-visible static">
           <a className="pl-10 -mt-7 absolute">
