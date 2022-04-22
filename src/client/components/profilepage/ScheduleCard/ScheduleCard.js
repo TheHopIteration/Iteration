@@ -44,15 +44,13 @@ export const ScheduleCard = ({ user, userEvents, setUserEvents }) => {
     }, [])
     
     return (
-           <Container
-                className="calendarcontainer"
-                sx = {
-                    {p:2}
-                }
-                >
+        <div className="flex w-full justify-center">
+        <div className="p-6 rounded-lg mb-12 w-full justify-center items-center text-center">
+        <h2 className="text-white  text-2xl leading-tight font-bold mb-4 flex-center">My Calendar</h2>
                 <Calendar onChange={pickDate}/>
                 <SavedEventsContainer user={user} userEvents={eventsToday} setUserEvents={setUserEvents} chosenDate={chosenDate} />
-            </Container>
+        </div>
+        </div>
 
     )
 }

@@ -5,6 +5,10 @@ const MuiTheme = createTheme({
         primary:{
             main: '#ee5d6c',
             contrastText: '#fff'
+        },
+        action: {
+            disabledBackground: '#D3D3D3',
+            disabled: '#808080'
         }
     }
 })
