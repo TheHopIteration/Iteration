@@ -70,7 +70,7 @@ export const EventCard = ({ event, cardId, user, num }) => {
                     <img className="rounded-t-lg" src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" alt="" />
                 </a> */}
                 <div className="p-4">
-                    <h5 className="text-custom-purple text-xl font-semibold mb-2">{num}. {event.title}</h5>
+                    <h5 className="text-black text-xl font-semibold mb-2">{num}. {event.title}</h5>
                     <div className='w-full flex justify-between'>
                         <p className="text-gray-700 text-md font-semibold">
                             Start Time:

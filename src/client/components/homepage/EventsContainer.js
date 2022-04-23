@@ -6,8 +6,8 @@ export const EventsContainer = ({ apiEvents, user }) => {
     return (
         <div className="h-auto bg-neutral-50">
             {apiEvents.length > 0 ?
-                <div className="border-b py-0.5 flex justify-around  bg-sky-100 ">
-                    <p className='text-md font-medium text-gray-600'>No. of events found: <span className="font-semibold text-cyan-800">{numEvents}</span></p>
+                <div className="border-b py-0.5 flex justify-around  bg-white">
+                    <p className='text-md font-medium text-gray-600'>No. of events found: <span className="font-semibold text-black">{numEvents}</span></p>
                 </div>
                 :
                 <div className="py-0.5 flex justify-around bg-custom-yellow">

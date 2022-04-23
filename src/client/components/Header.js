@@ -82,7 +82,7 @@ export const Header = ({ user, setUser }) => {
           rounded
           shadow-md
           hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg
-          active:bg-yellow-700 active:shadow-lg active:text-white
+          active:bg-custom-yellow active:shadow-lg active:text-white
           transition
           duration-150
           ease-in-out

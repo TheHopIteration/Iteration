@@ -116,7 +116,7 @@ export const SignupPage = () => {
                                 <br></br>
                                 <button
                                     onClick={() => navigate('/login')}
-                                    className="ml-2 text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out" >
+                                    className="ml-2 text-custom-darkcoral hover:text-custom-darkcoral focus:text-custom-darkcoral transition duration-200 ease-in-out" >
                                     Back to login
                                 </button>
                             </div>

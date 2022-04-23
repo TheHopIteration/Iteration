@@ -3,7 +3,7 @@ import { Circle, GoogleMap, Marker, MarkerClusterer, InfoWindow, useJsApiLoader 
 
 
 const containerStyle = {
-    width: '200vh',
+    width: '100%',
     height: '72.5vh'
 };
 
