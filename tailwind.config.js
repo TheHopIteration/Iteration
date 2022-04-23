@@ -14,7 +14,11 @@ module.exports = {
       'custom-orange':'#fb9062',
       'custom-yellow': '#eeaf61',
     },
-    extend: {},
+    extend: {
+      width:{
+        'custom500': '500px'
+      }
+    },
   },
   plugins: [require("tw-elements/dist/plugin"), require('flowbite/plugin')],
 };

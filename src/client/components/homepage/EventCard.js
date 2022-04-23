@@ -2,7 +2,7 @@ import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 
 
-export const EventCard = ({ event, cardId, user, num }) => {
+export const EventCard = ({ event, cardId, user, num, setSaveEventNotification }) => {
 
     // converts date string into a local date time format, removes the last 21 characters
     const timeConverter = (datetime) => {
@@ -54,6 +54,7 @@ export const EventCard = ({ event, cardId, user, num }) => {
             }),
         }).then(response => response.json())
             .then(data => {
+                setSaveEventNotification(true);
                 if (data === 'event has been saved') {
                     document.getElementById(`hiddenError${cardId}`).style.display = 'flex';
                 }

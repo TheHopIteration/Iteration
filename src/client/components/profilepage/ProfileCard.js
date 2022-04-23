@@ -15,7 +15,8 @@ export const ProfileCard = ({ user }) => {
         <Container
             className="mainprofilecardcontainer"
             sx={
-                {p:2
+                {p:2,
+                pb: 5,
                 }
             }
         >

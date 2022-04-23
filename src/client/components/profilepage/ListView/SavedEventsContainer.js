@@ -42,7 +42,7 @@ export const SavedEventsContainer = ({ user, userEvents, setUserEvents, view, ch
     useEffect(() => {
         // console.log('Your chosen date is: ', chosenDate)
         if (view === 'list'){
-            setText('All Saved Events')
+            setText('Saved Events')
         }
         else{
             setText(`Events on ${chosenDate}`)

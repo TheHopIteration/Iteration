@@ -3,15 +3,17 @@ import { Viewcomponent } from './profilepage/viewcomponent';
 import { Friends } from './profilepage/Friends.jsx';
 import { Footer } from './Footer';
 import { ProfileCard } from './profilepage/ProfileCard';
-import { TextField, Button, Stack, InputLabel, Select, MenuItem } from '@mui/material';
+import { TextField, Button, Stack, InputLabel, Select, MenuItem, ThemeProvider, Container, Paper, Autocomplete } from '@mui/material';
 
+import MuiTheme from "./MuiTheme"
 
 export const ProfilePage = ({ user }) => {
   const [userEvents, setUserEvents] = useState([]);
   const [eventsUsername, setEventsUsername] = useState([user.username]);
   const [friends, setFriends] = useState([]);
   const [newFriend, setNewFriend] = useState('');
-  const [view, setView] = useState('list')
+  const [view, setView] = useState('list');
+  const [allUsernames, setAllUsernames] = useState('');
 
 
   // handle button clicks
@@ -44,7 +46,10 @@ export const ProfilePage = ({ user }) => {
   }
   
   const handleAddFriend = () => {
-    if (!newFriend) alert('Please enter a Friend\'s username before adding Friend!')
+    if (!newFriend) {
+      alert('Please enter a Friend\'s username before adding Friend!')
+      return;
+    }
     fetch('http://localhost:3000/api/friends', {
       method: 'POST',
       headers: {
@@ -66,7 +71,10 @@ export const ProfilePage = ({ user }) => {
   }
 
   const handleRemoveFriend = () => {
-    if (!newFriend) alert('Please enter a Friend\'s username before removing Friend!')
+    if (!newFriend) {
+      alert('Please enter a Friend\'s username before removing Friend!')
+      return;
+    }
     fetch('http://localhost:3000/api/friends', {
       method: 'DELETE',
       headers: {
@@ -123,36 +131,80 @@ export const ProfilePage = ({ user }) => {
       })
   }, [eventsUsername]);
 
+  //load all usernames once upon loading
+  useEffect(() => {
+      fetch("/api/users/all", {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => response.json())
+        .then(data => {
+          let usernames = [];
+          data.forEach((user) => {
+            usernames.push(user.username);
+          })
+          console.log(`DATA: ${JSON.stringify(data)}`)
+          setAllUsernames(usernames)
+        })
+  }, []);
+  
+
+
 
   return (
+    <ThemeProvider theme={MuiTheme}>
     <div className='flex-col justify-center'>
-      <div className="flex font-serif bg-gray-100 shadow-lg">
+      <div className="flex font-serif bg-gradient-to-br from-custom-yellow via-custom-orange via-custom-darkcoral via-custom-darkpink to-custom-purple
+ shadow-lg">
         <div className="h-[86vh] w-2/5 overflow-y-auto">
           <ProfileCard user={user}></ProfileCard>
-        </div>
-        <div className="h-[86vh] w-2/5 overflow-y-auto">
-          <div>Current Friends:</div>
+          <Container
+            className="friendslistcontainer"
+            sx={
+              {p:2}
+            }
+            >
+          
+          <Stack direction="row" spacing={2}>
+          <Autocomplete
+          disablePortal
+          options={allUsernames}
+          renderInput={(params) => <TextField {...params} sx={{width:210}} label="Search Users" variant="outlined"/> }
+          value={newFriend}
+          onChange={(e, newVal) => {setNewFriend(newVal)}}
+          />
+          {/* // <TextField value={newFriend} onChange={(e) => setNewFriend(e.target.value)} label='friend username' variant='outlined'/> */}
+          <Button
+            variant='contained'
+            onClick={handleAddFriend}
+          >
+            Add Friend
+          </Button>
+          <Button
+            variant='contained'
+            onClick={handleRemoveFriend}
+          >
+            Remove Friend
+          </Button>
+          </Stack>
+          <h2 className="text-white  text-2xl leading-tight font-bold mb-4 mt-4 flex-center w-custom500 content-center">Who I'm 'peeping'</h2>
+          <Stack direction="column" spacing={2}
+          sx={{
+            p:2,
+            bgcolor: 'background.paper',
+            boxShadow: 1,
+            maxWidth: 500
+          }}
+          >
           <Friends friends={friends}/>
+          </Stack>
+          </Container>
         </div>
         <div className="h-[86vh] w-3/5 overflow-y-auto justify-center">
           <Stack direction="row" spacing={2} justifyContent="center"
           sx = {{
             pt: 2,
           }}>
-            <TextField value={newFriend} onChange={(e) => setNewFriend(e.target.value)} label='friend username' variant='outlined'/>
-            <Button
-              variant='outlined'
-              onClick={handleAddFriend}
-            >
-              Add Friend
-            </Button>
-            <Button
-              variant='outlined'
-              onClick={handleRemoveFriend}
-            >
-              Remove Friend
-            </Button>
-            <InputLabel>User to track</InputLabel>
             <Select
               value={eventsUsername}
               label="User to track"
@@ -164,13 +216,13 @@ export const ProfilePage = ({ user }) => {
               )}
             </Select>
             <Button
-              variant="outlined"
+              variant="contained"
               onClick={handleList}
             >
               List View
             </Button>
             <Button
-              variant="outlined"
+              variant="contained"
               onClick={handleCal}
             >
               Calendar View
@@ -181,5 +233,6 @@ export const ProfilePage = ({ user }) => {
       </div>
       <Footer />
     </div>
+    </ThemeProvider>
   )
 }
