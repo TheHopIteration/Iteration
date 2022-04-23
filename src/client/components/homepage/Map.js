@@ -92,7 +92,7 @@ export const Map = ({ apiEvents, mapBase, mapRef, circleRadius }) => {
                                         label={{
                                             text: index + 1 + "",
                                             color: "#ffffff",
-                                            fontSize: "15px semibold",
+                                            fontSize: "15px",
                                         }}
                                         icon={{
                                             url: "/img/purple orange carrot.png",
