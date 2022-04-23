@@ -18,7 +18,7 @@ export const Map = ({ apiEvents, mapBase, mapRef, circleRadius }) => {
 
     const center = useMemo(() => ({ lat: 37.768, lng: -122.42 }), []);
     const options = useMemo(() => ({
-        mapId: "4db6fc355c1b4a66",
+        mapId: "e94cf61d9c325ba8",
         disableDefaultUI: false,
         clickableIcons: false,
     }), []);
@@ -59,9 +59,9 @@ export const Map = ({ apiEvents, mapBase, mapRef, circleRadius }) => {
                             editable: false,
                             visible: true,
                             zIndex: 1,
-                            fillOpacity: 0.05,
-                            strokeColor: "#eeaf61",
-                            fillColor: "#eeaf61"
+                            fillOpacity: 0.08,
+                            strokeColor: "#ee5d6c",
+                            fillColor: "#ee5d6c"
                         }}
                     />
                 )}
@@ -92,11 +92,11 @@ export const Map = ({ apiEvents, mapBase, mapRef, circleRadius }) => {
                                         label={{
                                             text: index + 1 + "",
                                             color: "#ffffff",
-                                            fontSize: "13px",
+                                            fontSize: "15px semibold",
                                         }}
                                         icon={{
-                                            url: "/img/carrot.png",
-                                            scaledSize: new google.maps.Size(47, 37)
+                                            url: "/img/purple orange carrot.png",
+                                            scaledSize: new google.maps.Size(50, 50)
                                         }}
                                         onClick={() => {
                                             setSelectedEvent(event);
