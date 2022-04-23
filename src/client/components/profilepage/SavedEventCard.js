@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import { CheckBox } from '@mui/icons-material';
 import { Switch } from '@mui/material';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
@@ -58,20 +57,22 @@ export const SavedEventCard = ({ event, cardId, user, userEvents, setUserEvents,
                 <h5 className="text-gray-600 text-xl leading-tight font-semibold">{index + 1}. {event.title}</h5>
                 <p className="text-gray-600 text-base ">{event.start_time}</p>
                 <p>{event.address}</p>
-                <div className="flex space-x-2 justify-center">
+                <div className="flex space-x-2 justify-center content-center">
+                <h6 className="text-gray-600 content-center mt-4 p-1.5">Add to Route</h6>
                     <Switch
+                        className="mt-4 p-1.5"
                         onChange={() => handleSwitchChange()}
                     />
                     <a href={link} target="new">
                         <SearchIcon
-                            className="mt-4 p-1.5 rounded-md shadow-sm text-white bg-custom-darkcoral hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg"
-                            style={{ color: "text-gray-300", fontSize: 40 }}
+                            className="mt-4 p-1.5 rounded-md shadow-sm border-2 border-custom-darkcoral text-white bg-custom-darkcoral ml-4 mr-4 text-sm font-semibold uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
+                            style={{ color: "white", fontSize: 40 }}
                         />
                     </a>
                     <DeleteRoundedIcon
-                        className="mt-4 p-1.5 rounded-md shadow-sm text-white bg-custom-yellow hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg"
+                        className="mt-4 p-1.5 rounded-md shadow-sm border-2 border-custom-darkcoral text-custom-darkcoral ml-4 font-semibold text-sm uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
                         onClick={() => deleteEvent()}
-                        style={{ color: "text-gray-300", fontSize: 40 }}
+                        style={{ color: "custom-darkcoral", fontSize: 40 }}
                     />
                 </div>
             </div>

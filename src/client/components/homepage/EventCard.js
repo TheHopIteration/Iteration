@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 
 
 export const EventCard = ({ event, cardId, user, num, setSaveEventNotification }) => {
+
+    useEffect(() => {
+        console.log(event);
+    }, [])
 
     // converts date string into a local date time format, removes the last 21 characters
     const timeConverter = (datetime) => {
@@ -25,9 +29,7 @@ export const EventCard = ({ event, cardId, user, num, setSaveEventNotification }
     const privateVal = event.private ? event.private : null;
     const local_rank = event.local_rank ? event.local_rank : null;
     const rank = event.rank ? event.rank : null;
-    const address = event.entities[0].formatted_address ? event.entities[0].formatted_address.slice(0, -30) : null;
-    const distance = event.distance ? event.distance : null;
-    const duration = event.duration ? event.duration : null;
+    const address = event.entities[0] ? event.entities[0].formatted_address.slice(0, -30) : null;
 
     const saveEvent = () => {
         fetch('http://localhost:3000/api/events', {
@@ -54,9 +56,11 @@ export const EventCard = ({ event, cardId, user, num, setSaveEventNotification }
             }),
         }).then(response => response.json())
             .then(data => {
-                setSaveEventNotification(true);
                 if (data === 'event has been saved') {
                     document.getElementById(`hiddenError${cardId}`).style.display = 'flex';
+                }
+                else {
+                    setSaveEventNotification(true);
                 }
             })
             .catch(err => {
@@ -91,7 +95,7 @@ export const EventCard = ({ event, cardId, user, num, setSaveEventNotification }
                             </p>
                             <div className="flex">
                                 <div className='px-4'></div>
-                                <p className="text-gray-700 text-end">{event.entities[0].name}</p>
+                                <p className="text-gray-700 text-end text-right">{event.entities[0].name}</p>
                             </div>
                         </div>
                         :
@@ -104,33 +108,33 @@ export const EventCard = ({ event, cardId, user, num, setSaveEventNotification }
                             </p>
                             <div className="flex">
                                 <div className='px-2.5'></div>
-                                <p className="text-gray-700 text-md text-end">{event.entities[0].formatted_address.slice(0, -30)}</p>
+                                <p className="text-gray-700 text-md text-end text-right">{event.entities[0].formatted_address.slice(0, -30)}</p>
                             </div>
                         </div>
                         :
                         <></>
                     }
-                    {event.duration ?
+                    {event.travelDuration ?
                         <div className='w-full flex justify-between'>
                             <p className="text-gray-700 text-md font-semibold">
-                                Duration:
+                                Travel Duration:
                             </p>
                             <div className="flex">
                                 <div className='px-2.5'></div>
-                                <p className="text-gray-700 text-sm text-end">{event.duration}</p>
+                                <p className="text-gray-700 text-md text-end">{event.travelDuration}</p>
                             </div>
                         </div>
                         :
                         <></>
                     }
-                    {event.distance ?
+                    {event.travelDistance ?
                         <div className='w-full flex justify-between'>
                             <p className="text-gray-700 text-md font-semibold">
-                                Distance:
+                                Travel Distance:
                             </p>
                             <div className="flex">
                                 <div className='px-2.5'></div>
-                                <p className="text-gray-700 text-sm text-end">{event.distance}</p>
+                                <p className="text-gray-700 text-md text-end">{event.travelDistance}</p>
                             </div>
                         </div>
                         :

@@ -85,12 +85,12 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
         //   timeAndDistance = await calculateDistance(user.home_location, event.entities[0].formatted_address, event.location);
         //   event.distance = timeAndDistance.rows[0].elements[0].distance.text;
         //   event.duration = timeAndDistance.rows[0].elements[0].duration.text;
-        Promise.all(events.results.map(event => calculateDistance(user.home_location, event.entities[0].formatted_address, event.location)))
+        Promise.all(events.results.map(event => event.entities[0] ? calculateDistance(user.home_location, event.entities[0].formatted_address, event.location) : null))
           .then(result => {
             for (let i = 0; i < result.length; i++) {
-              console.log(events.results[i]);
-              events.results[i].distance = result[i].rows[0].elements[0].distance.text;
-              events.results[i].duration = result[i].rows[0].elements[0].duration.text;
+              console.log(result[i]);
+              events.results[i].travelDistance = result[i] ? result[i].rows[0].elements[0].distance.text : null;
+              events.results[i].travelDuration = result[i] ? result[i].rows[0].elements[0].duration.text : null;
             }
             console.log('returned data from predictHQ api is:', events.results);
             setApiEvents(events.results);
@@ -153,130 +153,130 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
   return (
     <div id="SearchBox" className="flex w-full m-4 items-center justify-center ">
 
-        <div className="text-md font-semibold text-black mr-1">Location:  </div>
+      <div className="text-md font-semibold text-black mr-1">Location:  </div>
 
-        <AutoComplete id="locationForm"
-          className= "w-72 px-3 py-2 font-normal text-black placeholder-gray-600 bg-white bg-clip-padding border-2 border-solid border-gray-600 rounded transition ease-in-out focus:text-black focus:bg-white focus:border-custom-darkcoral focus:outline-none"
+      <AutoComplete id="locationForm"
+        className="w-72 px-3 py-2 font-normal text-black placeholder-gray-600 bg-white bg-clip-padding border-2 border-solid border-gray-600 rounded transition ease-in-out focus:text-black focus:bg-white focus:border-custom-darkcoral focus:outline-none"
 
         // apiKey={process.env.GOOGLE_MAPS}
 
-          options={{
-            types: ["geocode"],
-            componentRestrictions: { country: "us" },
-          }}
-      
-          onPlaceSelected={(place) => {
-            console.log('returned autocompleted place is: ', place);
-          }}/>
+        options={{
+          types: ["geocode"],
+          componentRestrictions: { country: "us" },
+        }}
 
-      <div className="flex visible md:hidden"> 
-        <button 
-            className="px-2 py-2 border-2 border-custom-darkcoral text-custom-darkcoral ml-1 font-semibold text-sm uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
-            type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 fill-custom-darkcoral" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        onPlaceSelected={(place) => {
+          console.log('returned autocompleted place is: ', place);
+        }} />
+
+      <div className="flex visible md:hidden">
+        <button
+          className="px-2 py-2 border-2 border-custom-darkcoral text-custom-darkcoral ml-1 font-semibold text-sm uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
+          type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 fill-custom-darkcoral" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
           </svg>
 
         </button>
 
-          <button
-            onClick={() => {
-              onFind();
-            }}
-            className="px-2 py-2 border-2 border-custom-darkcoral text-white bg-custom-darkcoral ml-1 text-sm font-semibold uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
-            type="button"  data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <button
+          onClick={() => {
+            onFind();
+          }}
+          className="px-2 py-2 border-2 border-custom-darkcoral text-white bg-custom-darkcoral ml-1 text-sm font-semibold uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
+          type="button" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
-        </div>
-
-        <div className="invisible md:visible" > 
-          <button 
-            className="px-4 py-2 border-2 border-custom-darkcoral text-custom-darkcoral ml-4 font-semibold text-sm uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
-            type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
-          >
-            Filter Events
-          </button>
-
-          <button
-            onClick={() => {
-              onFind();
-            }}
-            className="px-4 py-2 border-2 border-custom-darkcoral text-white bg-custom-darkcoral ml-4 mr-4 text-sm font-semibold uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
-            type="button" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
-          >
-            Search Events
-          </button>
-        </div>
-
-
-      <div 
-        className="offcanvas offcanvas-start fixed bottom-0 flex flex-col max-w-full bg-custom-yellow invisible shadow-sm outline-none transition duration-300 ease-in-out text-black top-0 left-0 border-none w-96" 
-        tabIndex="-1" 
-        id="offcanvasExample" 
-        aria-labelledby="offcanvasExampleLabel">
-            
-        <div className="offcanvas-header flex mt-1 items-center justify-between p-4">
-        
-        <h3 
-          className="offcanvas-title mb-0 leading-normal text-xl font-semibold" 
-          id="offcanvasExampleLabel">
-          Search Options
-        </h3>
-
-        <button 
-          type="button" 
-          className="btn-close box-content w-4 h-4 p-2 -my-5 -mr-2 text-black border-none rounded-none opacity-50 hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg" 
-          data-bs-dismiss="offcanvas" 
-          aria-label="Close">
+          </svg>
         </button>
       </div>
 
       <div className="invisible md:visible" >
+        <button
+          className="px-4 py-2 border-2 border-custom-darkcoral text-custom-darkcoral ml-4 font-semibold text-sm uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
+          type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+        >
+          Filter Events
+        </button>
 
-        <div className="flex mt-2 justify-center"> 
-          <div>
-            <div className="flex flex-col md:flex-row mb-3">
-              <div className="text-md text-black mt-1 mr-1">Start date</div>
-              <input 
-                type="date"
-                className="form-control w-48 px-3 py-1.5 text-base font-normal text-gray-600 bg-white bg-clip-padding border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-custom-darkcoral focus:outline-none"
-                id="startDateForm"
-                defaultValue={todayDate}
-                placeholder="04-01-2022"
-                onChange={(e) => { }}
-              />
-            </div>
+        <button
+          onClick={() => {
+            onFind();
+          }}
+          className="px-4 py-2 border-2 border-custom-darkcoral text-white bg-custom-darkcoral ml-4 mr-4 text-sm font-semibold uppercase rounded hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg transition duration-150 ease-in-out"
+          type="button" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+        >
+          Search Events
+        </button>
+      </div>
 
-            <div className="mb-3 flex flex-col md:flex-row">
-              <div className="text-md text-black mt-1 mr-2.5">End date</div>
-              <input
-                type="date"
-                className= "form-control w-48 px-3 py-1.5 text-base font-normal text-gray-600 bg-white bg-clip-padding border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-custom-darkcoral focus:outline-none"
-                id="endDateForm"
-                defaultValue={todayDate}
-                placeholder="04-30-2022"
-                onChange={(e) => { }}
-              />
-            </div>
 
-            <div className="mb-3 flex flex-col md:flex-row">
-              <div className="text-md text-black mt-1 mr-1">Radius (miles)</div>
-              <input
-                type="text"
-                className= "form-control w-40 px-3 py-1.5 text-base font-normal text-gray-600 bg-white bg-clip-padding border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-custom-darkcoral focus:outline-none"
-                id="radiusForm"
-                defaultValue="5"
-                placeholder="5"
-                onChange={(e) => { }}
-              />
-            </div>
+      <div
+        className="offcanvas offcanvas-start fixed bottom-0 flex flex-col max-w-full bg-custom-yellow invisible shadow-sm outline-none transition duration-300 ease-in-out text-black top-0 left-0 border-none w-96"
+        tabIndex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel">
 
-            <div className="text-md text-black mb-1 mt-5">Categories</div>
-               <div className="form-check">
+        <div className="offcanvas-header flex mt-1 items-center justify-between p-4">
+
+          <h3
+            className="offcanvas-title mb-0 leading-normal text-xl font-semibold"
+            id="offcanvasExampleLabel">
+            Search Options
+          </h3>
+
+          <button
+            type="button"
+            className="btn-close box-content w-4 h-4 p-2 -my-5 -mr-2 text-black border-none rounded-none opacity-50 hover:brightness-75 hover:shadow-lg focus:bg-darkcoral focus:shadow-lg"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close">
+          </button>
+        </div>
+
+        <div className="invisible md:visible" >
+
+          <div className="flex mt-2 justify-center">
+            <div>
+              <div className="flex flex-col md:flex-row mb-3">
+                <div className="text-md text-black mt-1 mr-1">Start date</div>
+                <input
+                  type="date"
+                  className="form-control w-48 px-3 py-1.5 text-base font-normal text-gray-600 bg-white bg-clip-padding border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-custom-darkcoral focus:outline-none"
+                  id="startDateForm"
+                  defaultValue={todayDate}
+                  placeholder="04-01-2022"
+                  onChange={(e) => { }}
+                />
+              </div>
+
+              <div className="mb-3 flex flex-col md:flex-row">
+                <div className="text-md text-black mt-1 mr-2.5">End date</div>
+                <input
+                  type="date"
+                  className="form-control w-48 px-3 py-1.5 text-base font-normal text-gray-600 bg-white bg-clip-padding border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-custom-darkcoral focus:outline-none"
+                  id="endDateForm"
+                  defaultValue={todayDate}
+                  placeholder="04-30-2022"
+                  onChange={(e) => { }}
+                />
+              </div>
+
+              <div className="mb-3 flex flex-col md:flex-row">
+                <div className="text-md text-black mt-1 mr-1">Radius (miles)</div>
+                <input
+                  type="text"
+                  className="form-control w-40 px-3 py-1.5 text-base font-normal text-gray-600 bg-white bg-clip-padding border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-custom-darkcoral focus:outline-none"
+                  id="radiusForm"
+                  defaultValue="5"
+                  placeholder="5"
+                  onChange={(e) => { }}
+                />
+              </div>
+
+              <div className="text-md text-black mb-1 mt-5">Categories</div>
+              <div className="form-check">
                 <input
                   className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   type="checkbox"
@@ -284,24 +284,24 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
                   id="flexCheckCommunity"
                   defaultChecked={true}
                 />
-                <label 
-                  className="form-check-label inline-block text-black" 
+                <label
+                  className="form-check-label inline-block text-black"
                   htmlFor="flexCheckCommunity"
                 >
                   Community
                 </label>
               </div>
 
-               <div className="form-check">
-                 <input
+              <div className="form-check">
+                <input
                   className="form-check-input appearance-none h-5 w-5 border border-gray-300 rounded-sm bg-white checked:bg-custom-darkcoral checked:border-custom-darkcoral focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   type="checkbox"
                   value="concerts"
                   id="flexCheckConcerts"
                   defaultChecked={true}
-                 />
-                 <label 
-                  className="form-check-label inline-block text-black" 
+                />
+                <label
+                  className="form-check-label inline-block text-black"
                   htmlFor="flexCheckConcerts"
                 >
                   Concerts
@@ -396,7 +396,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
                   type="checkbox"
                   value="distanceDuration"
                   id="distanceDuration"
-                  defaultChecked={false}
+                  defaultChecked={true}
                 />
                 <label
                   className="form-check-label inline-block text-gray-800"
