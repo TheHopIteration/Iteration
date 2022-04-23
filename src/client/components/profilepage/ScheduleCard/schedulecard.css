@@ -31,35 +31,35 @@
    .react-calendar__tile:enabled:hover,
    .react-calendar__tile:enabled:focus {
     background: #f8f8fa;
-    color: #16db9a86;
+    color: #6a0d83;
     border-radius: 6px;
    }
    .react-calendar__tile--now {
     background: #6f48eb33;
     border-radius: 6px;
     font-weight: bold;
-    color: #16db9a86;
+    color: #6a0d83;
    }
    .react-calendar__tile--now:enabled:hover,
    .react-calendar__tile--now:enabled:focus {
     background: #6f48eb33;
     border-radius: 6px;
     font-weight: bold;
-    color: #16db9a86;
+    color: #6a0d83;
    }
    .react-calendar__tile--hasActive:enabled:hover,
    .react-calendar__tile--hasActive:enabled:focus {
     background: #f8f8fa;
    }
    .react-calendar__tile--active {
-    background: #16db9a86;
+    background: #ee5d6c;
     border-radius: 6px;
     font-weight: bold;
     color: white;
    }
    .react-calendar__tile--active:enabled:hover,
    .react-calendar__tile--active:enabled:focus {
-    background: #16db9a86;
+    background: #ee5d6c;
     color: white;
    }
    .react-calendar--selectRange .react-calendar__tile--hover {
