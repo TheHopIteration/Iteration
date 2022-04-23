@@ -25,7 +25,7 @@ export const EventCard = ({ event, cardId, user, num, setSaveEventNotification }
     const privateVal = event.private ? event.private : null;
     const local_rank = event.local_rank ? event.local_rank : null;
     const rank = event.rank ? event.rank : null;
-    const address = event.entities[0].formatted_address ? event.entities[0].formatted_address.slice(0, -30) : null;
+    const address = event.entities[0] ? event.entities[0].formatted_address.slice(0, -30) : null;
     const distance = event.distance ? event.distance : null;
     const duration = event.duration ? event.duration : null;
 

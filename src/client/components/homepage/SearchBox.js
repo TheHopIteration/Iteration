@@ -396,7 +396,7 @@ export const SearchBox = ({ apiEvents, setApiEvents, setMapBase, mapRef, setCirc
                   type="checkbox"
                   value="distanceDuration"
                   id="distanceDuration"
-                  defaultChecked={false}
+                  defaultChecked={true}
                 />
                 <label
                   className="form-check-label inline-block text-gray-800"
